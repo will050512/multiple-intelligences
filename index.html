@@ -242,7 +242,8 @@
       border:2px solid rgba(11,120,198,0.06);
       transition:all 0.3s;
       position:relative;
-      overflow:hidden
+      overflow:hidden;
+      cursor:pointer
     }
     .module-card::before{
       content:'';position:absolute;
@@ -361,6 +362,146 @@
     }
     #msg.show{display:block}
     #msg.success{background:#d4edda;color:#155724}
+
+    /* Video Modal */
+    .video-modal{
+      display:none;
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:rgba(0,0,0,0.9);
+      z-index:9999;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      animation:fadeIn 0.3s ease
+    }
+    .video-modal.active{display:flex}
+    
+    @keyframes fadeIn{
+      from{opacity:0}
+      to{opacity:1}
+    }
+    
+    .video-container{
+      position:relative;
+      width:100%;
+      max-width:900px;
+      background:#000;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,0.5);
+      animation:scaleIn 0.3s ease
+    }
+    
+    @keyframes scaleIn{
+      from{transform:scale(0.9);opacity:0}
+      to{transform:scale(1);opacity:1}
+    }
+    
+    .video-header{
+      position:absolute;
+      top:0;left:0;right:0;
+      padding:20px;
+      background:linear-gradient(180deg,rgba(0,0,0,0.8),transparent);
+      z-index:10;
+      display:flex;
+      justify-content:space-between;
+      align-items:center
+    }
+    
+    .video-title{
+      color:#fff;
+      font-size:20px;
+      font-weight:800;
+      text-shadow:0 2px 8px rgba(0,0,0,0.5)
+    }
+    
+    .close-btn{
+      width:40px;height:40px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.2);
+      backdrop-filter:blur(10px);
+      border:2px solid rgba(255,255,255,0.3);
+      color:#fff;
+      font-size:24px;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      transition:all 0.2s;
+      flex-shrink:0
+    }
+    .close-btn:hover{
+      background:rgba(255,255,255,0.3);
+      transform:scale(1.1)
+    }
+    
+    .video-wrapper{
+      position:relative;
+      width:100%;
+      padding-top:56.25%; /* 16:9 aspect ratio */
+      background:#000
+    }
+    
+    .video-wrapper video{
+      position:absolute;
+      top:0;left:0;
+      width:100%;
+      height:100%;
+      object-fit:contain
+    }
+    
+    .play-icon{
+      position:absolute;
+      top:50%;left:50%;
+      transform:translate(-50%,-50%);
+      width:80px;height:80px;
+      background:rgba(255,123,179,0.9);
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size:36px;
+      color:#fff;
+      pointer-events:none;
+      opacity:0;
+      transition:opacity 0.3s;
+      z-index:5
+    }
+    .module-card:hover .play-icon{
+      opacity:1
+    }
+    
+    /* Mobile Video Modal Adjustments */
+    @media (max-width:768px){
+      .video-modal{padding:10px}
+      .video-container{border-radius:16px}
+      .video-header{padding:12px}
+      .video-title{font-size:16px}
+      .close-btn{
+        width:36px;
+        height:36px;
+        font-size:20px
+      }
+      .play-icon{
+        width:60px;
+        height:60px;
+        font-size:28px
+      }
+    }
+    
+    @media (max-width:480px){
+      .video-modal{padding:0}
+      .video-container{
+        border-radius:0;
+        max-width:100%;
+        height:100vh
+      }
+      .video-wrapper{
+        padding-top:0;
+        height:100vh
+      }
+      .video-header{padding:10px}
+      .video-title{font-size:14px}
+    }
 
     /* Responsive - Tablet */
     @media (max-width:1024px){
@@ -631,9 +772,10 @@
         </div>
         
         <div class="modules-grid">
-          <div class="module-card">
+          <div class="module-card" data-video="八大圖檔/學前水果島.mp4" data-title="學前水果島">
             <div class="module-image">
               <img src="八大圖檔/學前水果島.png" alt="學前水果島" />
+              <div class="play-icon">▶</div>
             </div>
             <div class="module-content">
               <h3>🍎 學前水果島</h3>
@@ -641,9 +783,10 @@
             </div>
           </div>
 
-          <div class="module-card">
+          <div class="module-card" data-video="八大圖檔/八大智能.mp4" data-title="八大智能">
             <div class="module-image">
               <img src="八大圖檔/八大智能.png" alt="八大智能" />
+              <div class="play-icon">▶</div>
             </div>
             <div class="module-content">
               <h3>🎨 八大智能</h3>
@@ -651,9 +794,10 @@
             </div>
           </div>
 
-          <div class="module-card">
+          <div class="module-card" data-video="八大圖檔/AI雙語島.mp4" data-title="AI雙語島">
             <div class="module-image">
               <img src="八大圖檔/AI雙嶼島.png" alt="AI雙語島" />
+              <div class="play-icon">▶</div>
             </div>
             <div class="module-content">
               <h3>🌏 AI雙語島</h3>
@@ -661,9 +805,10 @@
             </div>
           </div>
 
-          <div class="module-card">
+          <div class="module-card" data-video="八大圖檔/學測滿冠王.mp4" data-title="學測滿冠王">
             <div class="module-image">
               <img src="八大圖檔/滿貫王.png" alt="學測滿冠王" />
+              <div class="play-icon">▶</div>
             </div>
             <div class="module-content">
               <h3>👸 學測滿冠王</h3>
@@ -671,9 +816,10 @@
             </div>
           </div>
 
-          <div class="module-card">
+          <div class="module-card" data-video="八大圖檔/生字大辭典.mp4" data-title="生字大辭典">
             <div class="module-image">
               <img src="八大圖檔/生字大辭典.png" alt="生字大辭典" />
+              <div class="play-icon">▶</div>
             </div>
             <div class="module-content">
               <h3>📚 生字大辭典</h3>
@@ -681,9 +827,10 @@
             </div>
           </div>
 
-          <div class="module-card">
+          <div class="module-card" data-video="八大圖檔/AI編程島.mp4" data-title="AI編程島">
             <div class="module-image">
               <img src="八大圖檔/AI邊城島.png" alt="AI編程島" />
+              <div class="play-icon">▶</div>
             </div>
             <div class="module-content">
               <h3>💻 AI編程島</h3>
@@ -748,7 +895,84 @@
     </main>
   </div>
 
+  <!-- Video Modal -->
+  <div class="video-modal" id="videoModal">
+    <div class="video-container">
+      <div class="video-header">
+        <div class="video-title" id="videoTitle">模組介紹</div>
+        <button class="close-btn" id="closeBtn">✕</button>
+      </div>
+      <div class="video-wrapper">
+        <video id="moduleVideo" controls preload="metadata">
+          <source src="" type="video/mp4">
+          您的瀏覽器不支援影片播放。
+        </video>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Video Modal Functionality
+    const videoModal = document.getElementById('videoModal');
+    const moduleVideo = document.getElementById('moduleVideo');
+    const videoTitle = document.getElementById('videoTitle');
+    const closeBtn = document.getElementById('closeBtn');
+    const moduleCards = document.querySelectorAll('.module-card');
+
+    // Open video modal
+    moduleCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const videoSrc = this.getAttribute('data-video');
+        const title = this.getAttribute('data-title');
+        
+        if(videoSrc) {
+          videoTitle.textContent = title;
+          moduleVideo.src = videoSrc;
+          videoModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          
+          // Auto play video
+          setTimeout(() => {
+            moduleVideo.play().catch(err => {
+              console.log('自動播放失敗,請手動點擊播放按鈕');
+            });
+          }, 300);
+        }
+      });
+    });
+
+    // Close video modal function
+    function closeVideoModal() {
+      videoModal.classList.remove('active');
+      moduleVideo.pause();
+      moduleVideo.currentTime = 0;
+      moduleVideo.src = '';
+      document.body.style.overflow = '';
+    }
+
+    // Close button click
+    closeBtn.addEventListener('click', closeVideoModal);
+
+    // Click outside video to close
+    videoModal.addEventListener('click', function(e) {
+      if(e.target === videoModal) {
+        closeVideoModal();
+      }
+    });
+
+    // ESC key to close
+    document.addEventListener('keydown', function(e) {
+      if(e.key === 'Escape' && videoModal.classList.contains('active')) {
+        closeVideoModal();
+      }
+    });
+
+    // Prevent video click from closing modal
+    document.querySelector('.video-container').addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+
+    // Form submission
     document.getElementById('bookForm').addEventListener('submit', function(e) {
       setTimeout(function() {
         const msg = document.getElementById('msg');
