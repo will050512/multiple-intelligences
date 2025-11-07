@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>愛米·夢境學堂 — AI智能學習平台</title>
+  <style>
+    :root{
+      --brand:#0b78c6;
+      --accent:#ff7bb3;
+      --accent-2:#ff9a3c;
+      --muted:#5b6975;
+      --bg:#dff6ff;
+      --card:#fff;
+      --radius:16px;
+      --container:1200px;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:linear-gradient(180deg,#def6ff 0%, #f7fbff 100%);color:#0f1724;line-height:1.6;overflow-x:hidden}
+    .wrap{max-width:var(--container);margin:0 auto;padding:0 20px}
+
+    /* Floating Header */
+    header{position:sticky;top:16px;z-index:100;margin-bottom:24px}
+    .topbar{
+      display:flex;align-items:center;gap:20px;
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(12px);
+      padding:16px 24px;border-radius:20px;
+      box-shadow:0 8px 32px rgba(11,120,198,0.12), 0 2px 8px rgba(0,0,0,0.04);
+      transition:all 0.3s ease
+    }
+    .topbar:hover{box-shadow:0 12px 40px rgba(11,120,198,0.18), 0 4px 12px rgba(0,0,0,0.06)}
+    
+    .logo{display:flex;align-items:center;gap:16px;cursor:pointer;transition:transform 0.2s}
+    .logo:hover{transform:translateY(-2px)}
+    .logo-mark{
+      width:64px;height:64px;border-radius:16px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:grid;place-items:center;
+      box-shadow:0 8px 24px rgba(255,123,179,0.25);
+      overflow:hidden
+    }
+    .logo-mark img{width:100%;height:100%;object-fit:cover}
+    
+    .brand-title .title{font-weight:900;font-size:20px;color:#0f1724}
+    .brand-title .sub{font-size:13px;color:var(--muted);margin-top:2px}
+
+    .nav{margin-left:auto;display:flex;gap:8px;align-items:center}
+    .nav a{
+      color:var(--brand);text-decoration:none;
+      padding:10px 16px;border-radius:12px;
+      font-weight:600;font-size:14px;
+      background:rgba(11,120,198,0.06);
+      transition:all 0.2s
+    }
+    .nav a:hover{background:rgba(11,120,198,0.12);transform:translateY(-1px)}
+    .cta{
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#fff;padding:12px 20px;
+      font-weight:800;
+      box-shadow:0 4px 16px rgba(255,123,179,0.3)
+    }
+    .cta:hover{box-shadow:0 6px 24px rgba(255,123,179,0.4);transform:translateY(-2px)}
+
+    /* Hero Section - Improved Layout */
+    .hero{
+      display:grid;
+      grid-template-columns:1.2fr 0.8fr;
+      gap:32px;
+      align-items:start;
+      margin:32px 0 48px
+    }
+
+    .hero-main{
+      background:linear-gradient(180deg,#ffffff 0%, #fff7fb 100%);
+      border-radius:24px;
+      padding:32px;
+      box-shadow:0 20px 60px rgba(11,120,198,0.1), 0 8px 24px rgba(0,0,0,0.04);
+      position:relative;
+      overflow:hidden
+    }
+    .hero-main::before{
+      content:'';position:absolute;top:-50%;right:-20%;
+      width:400px;height:400px;
+      background:radial-gradient(circle,rgba(255,123,179,0.08),transparent);
+      pointer-events:none
+    }
+
+    .hero-header{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:flex-start;margin-bottom:32px;position:relative}
+    .hero-image{
+      width:120px;height:120px;border-radius:20px;
+      border:6px solid rgba(255,255,255,0.9);
+      overflow:hidden;flex-shrink:0;
+      box-shadow:0 12px 32px rgba(11,120,198,0.12)
+    }
+    .hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+    
+    .hero-text h1{
+      font-size:32px;font-weight:900;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:12px;
+      line-height:1.2
+    }
+    .hero-text p{color:var(--muted);font-size:16px;line-height:1.6}
+
+    .price-tag{
+      text-align:right;
+      background:linear-gradient(135deg,rgba(255,255,255,0.95),rgba(255,247,251,0.95));
+      padding:16px 20px;border-radius:16px;
+      box-shadow:0 8px 24px rgba(11,120,198,0.08)
+    }
+    .price-tag .amount{
+      font-weight:900;color:var(--brand);
+      font-size:28px;line-height:1
+    }
+    .price-tag .label{font-size:13px;color:var(--muted);margin-top:4px}
+
+    /* Feature Grid */
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:20px;
+      position:relative
+    }
+    .feature-card{
+      background:linear-gradient(180deg,#fff 0%,#f6fdff 100%);
+      border-radius:16px;padding:20px;
+      border:1px solid rgba(11,120,198,0.08);
+      box-shadow:0 4px 16px rgba(11,120,198,0.04);
+      transition:all 0.3s
+    }
+    .feature-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 12px 32px rgba(11,120,198,0.12)
+    }
+    .feature-card h4{
+      color:var(--brand);
+      font-size:18px;font-weight:800;
+      margin-bottom:12px
+    }
+    .feature-card .img-box{
+      width:100%;height:160px;
+      border-radius:12px;overflow:hidden;
+      margin-bottom:12px;
+      background:#f0f9ff
+    }
+    .feature-card img{width:100%;height:100%;object-fit:cover}
+    .feature-card p{color:var(--muted);font-size:14px;line-height:1.6}
+
+    /* Booking Card - Enhanced */
+    .booking-card{
+      background:linear-gradient(180deg,#fff 0%,#fffaf5 100%);
+      border-radius:24px;padding:28px;
+      box-shadow:0 20px 60px rgba(15,23,36,0.1), 0 8px 24px rgba(0,0,0,0.04);
+      position:sticky;top:120px
+    }
+    .limited-badge{
+      position:absolute;right:24px;top:24px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#fff;padding:8px 16px;
+      border-radius:999px;font-weight:900;
+      font-size:13px;
+      box-shadow:0 6px 20px rgba(255,123,179,0.3);
+      animation:pulse 2s ease-in-out infinite
+    }
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+    .booking-card h3{margin:0 0 8px;font-size:24px;font-weight:900;color:#0f1724}
+    .booking-card .intro{font-size:14px;color:var(--muted);margin-bottom:24px}
+
+    /* Form Styles */
+    .field{margin-bottom:16px}
+    .field label{
+      display:block;font-size:14px;
+      color:#0f1724;font-weight:600;
+      margin-bottom:8px
+    }
+    .field input,.field select{
+      width:100%;padding:12px 16px;
+      border:2px solid #eef7fb;
+      border-radius:12px;font-size:15px;
+      background:#fff;
+      transition:all 0.2s;
+      font-family:inherit
+    }
+    .field input:focus,.field select:focus{
+      outline:none;
+      border-color:var(--brand);
+      box-shadow:0 0 0 3px rgba(11,120,198,0.1)
+    }
+
+    .btn-submit{
+      width:100%;
+      background:linear-gradient(135deg,var(--brand),#0a68b0);
+      color:#fff;padding:16px;
+      border:0;border-radius:12px;
+      font-weight:800;font-size:16px;
+      cursor:pointer;
+      transition:all 0.3s;
+      margin-top:8px
+    }
+    .btn-submit:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 24px rgba(11,120,198,0.3)
+    }
+
+    .note-box{
+      background:rgba(255,255,255,0.6);
+      border:1px dashed rgba(11,120,198,0.2);
+      border-radius:12px;padding:12px;
+      font-size:13px;color:var(--muted);
+      margin-top:16px
+    }
+
+    /* Modules Section */
+    #modules{padding:64px 0}
+    .section-header{text-align:center;margin-bottom:48px}
+    .section-header h2{
+      font-size:36px;font-weight:900;
+      margin-bottom:12px;color:#0f1724
+    }
+    .section-header p{color:var(--muted);font-size:16px}
+
+    .modules-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px
+    }
+    .module-card{
+      background:#fff;
+      border-radius:20px;
+      padding:24px;
+      box-shadow:0 8px 32px rgba(2,6,23,0.06);
+      border:2px solid rgba(11,120,198,0.06);
+      transition:all 0.3s;
+      position:relative;
+      overflow:hidden
+    }
+    .module-card::before{
+      content:'';position:absolute;
+      top:0;left:0;right:0;height:4px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      transform:scaleX(0);
+      transition:transform 0.3s
+    }
+    .module-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 16px 48px rgba(2,6,23,0.12);
+      border-color:var(--brand)
+    }
+    .module-card:hover::before{transform:scaleX(1)}
+    
+    .module-card h3{
+      font-size:20px;font-weight:800;
+      color:var(--brand);margin-bottom:12px
+    }
+    .module-card p{color:var(--muted);font-size:14px;line-height:1.7}
+
+    /* Parent Panel */
+    #parent{padding:64px 0;background:rgba(255,255,255,0.4);margin:48px -20px;padding-left:20px;padding-right:20px}
+    .panel-layout{
+      max-width:var(--container);margin:0 auto;
+      display:grid;grid-template-columns:1.5fr 1fr;
+      gap:32px
+    }
+    
+    .info-card{
+      background:#fff;
+      padding:32px;border-radius:20px;
+      box-shadow:0 8px 32px rgba(2,6,23,0.06);
+      margin-bottom:24px
+    }
+    .info-card h3{font-size:24px;font-weight:800;margin-bottom:20px;color:#0f1724}
+    
+    .feature-item{
+      display:flex;gap:16px;
+      padding:16px;border-radius:12px;
+      background:linear-gradient(135deg,rgba(11,120,198,0.04),rgba(255,154,60,0.02));
+      margin-bottom:16px
+    }
+    .feature-icon{
+      width:56px;height:56px;
+      border-radius:14px;
+      background:linear-gradient(135deg,rgba(11,120,198,0.1),rgba(255,154,60,0.08));
+      display:grid;place-items:center;
+      font-size:24px;flex-shrink:0
+    }
+    .feature-content strong{display:block;margin-bottom:4px;font-size:16px;color:#0f1724}
+    .feature-content .desc{font-size:14px;color:var(--muted)}
+
+    .quick-info{
+      background:#fff;
+      padding:28px;border-radius:20px;
+      box-shadow:0 8px 32px rgba(2,6,23,0.06)
+    }
+    .quick-info h3{font-size:20px;font-weight:800;margin-bottom:16px;color:#0f1724}
+    .quick-info ul{list-style:none;padding:0}
+    .quick-info li{
+      padding:12px 0;
+      border-bottom:1px solid #f0f9ff;
+      font-size:14px;color:var(--muted);
+      display:flex;align-items:center;gap:8px
+    }
+    .quick-info li:last-child{border-bottom:0}
+    .quick-info li::before{
+      content:'✓';
+      color:var(--brand);
+      font-weight:900;
+      font-size:16px
+    }
+
+    /* Footer */
+    footer{
+      text-align:center;
+      padding:48px 0;
+      color:var(--muted);
+      font-size:14px;
+      border-top:1px solid rgba(11,120,198,0.1)
+    }
+
+    /* Responsive */
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr}
+      .booking-card{position:relative;top:0}
+      .panel-layout{grid-template-columns:1fr}
+      .modules-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:768px){
+      .nav{display:none}
+      .hero-header{grid-template-columns:1fr;grid-template-rows:auto auto auto}
+      .price-tag{margin-top:16px}
+      .feature-grid{grid-template-columns:1fr}
+      .modules-grid{grid-template-columns:1fr}
+      .hero-text h1{font-size:24px}
+    }
+    @media (max-width:480px){
+      .topbar{padding:12px 16px}
+      .logo-mark{width:48px;height:48px}
+      .brand-title .title{font-size:16px}
+      .hero-main{padding:24px}
+    }
+
+    /* Success Message */
+    #msg{
+      margin-top:16px;
+      padding:12px;
+      border-radius:8px;
+      font-weight:600;
+      text-align:center;
+      display:none
+    }
+    #msg.show{display:block}
+    #msg.success{background:#d4edda;color:#155724}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="topbar">
+        <div class="logo" onclick="location.href='#'">
+          <div class="logo-mark">
+            <img src="八大圖檔/045122.png" alt="愛米夢境學堂LOGO" />
+          </div>
+          <div class="brand-title">
+            <div class="title">愛米 · 夢境學堂</div>
+            <div class="sub">遊戲化學習 × 家長控管 × AI雙語</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="#modules">課程模組</a>
+          <a href="#parent">家長控管</a>
+          <a href="#booking">立即預約</a>
+          <a class="cta" href="#booking">免費體驗 ✨</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-main">
+          <div class="hero-header">
+            <div class="hero-image">
+              <img src="八大圖檔/logo-1.png" alt="愛米夢境學堂" />
+            </div>
+            <div class="hero-text">
+              <h1>益智好腦力 × AI學習力</h1>
+              <p>遊戲化任務、八大智能分析、個別化教學建議與1對1報告解說，讓孩子在玩樂中激發潛能。</p>
+            </div>
+            <div class="price-tag">
+              <div class="amount">免費體驗</div>
+              <div class="label">原價 NT$3,980</div>
+            </div>
+          </div>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h4>🎮 遊戲化機制</h4>
+              <div class="img-box">
+                <img src="八大圖檔/20240513700890.jpg" alt="遊戲化機制" />
+              </div>
+              <p>將智能檢測融入具挑戰性與娛樂性的遊戲環境，大幅提高孩子參與度與學習動機。</p>
+            </div>
+
+            <div class="feature-card">
+              <h4>🧠 腦力激盪</h4>
+              <div class="img-box">
+                <img src="八大圖檔/Screenshot_20250825_135541.jpg" alt="腦力激盪" />
+              </div>
+              <p>透過多元遊戲判斷孩子思考模式與嘗試次數，完整記錄學習行為軌跡。</p>
+            </div>
+
+            <div class="feature-card">
+              <h4>📊 檢測報表</h4>
+              <div class="img-box">
+                <img src="八大圖檔/Screenshot_20250825_140045.jpg" alt="檢測報表" />
+              </div>
+              <p>提供視覺化的八大智能雷達圖與可下載報表，讓家長輕鬆掌握學習狀況。</p>
+            </div>
+
+            <div class="feature-card">
+              <h4>🎯 八大智能分析</h4>
+              <div class="img-box">
+                <img src="八大圖檔/Screenshot_20250825_140059.jpg" alt="八大智能分析" />
+              </div>
+              <p>結合遊戲表現與智能量表，提供個別化的教學建議與專屬成長路徑。</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="booking-card" id="booking">
+          <div class="limited-badge">限量預約</div>
+          <h3>立即預約免費體驗</h3>
+          <p class="intro">預約即享：八大智能檢測報告、學習風格分析與專人1對1解說（名額有限）</p>
+
+          <form id="bookForm" action="https://docs.google.com/forms/d/e/1FAIpQLScOOLHKquqDo_nup6p9472JTHR-I8EhgKTQv__obftwwRoV5w/formResponse" method="POST" target="_blank">
+            <div class="field">
+              <label>電子郵件</label>
+              <input type="email" name="emailAddress" placeholder="請輸入您的電子郵件" required />
+            </div>
+
+            <div class="field">
+              <label>家長姓名</label>
+              <input type="text" name="entry.662077624" placeholder="請輸入家長中文姓名" required />
+            </div>
+
+            <div class="field">
+              <label>聯絡電話</label>
+              <input type="tel" name="entry.1151242286" maxlength="12" placeholder="請輸入聯絡電話" required pattern="[0-9]{10,12}" />
+            </div>
+
+            <div class="field">
+              <label>地址</label>
+              <select name="entry.1721483781" required>
+                <option value="">請選擇縣市</option>
+                <option value="基隆市">基隆市</option>
+                <option value="臺北市">臺北市</option>
+                <option value="新北市">新北市</option>
+                <option value="桃園市">桃園市</option>
+                <option value="新竹縣">新竹縣</option>
+                <option value="新竹市">新竹市</option>
+                <option value="苗栗縣">苗栗縣</option>
+                <option value="臺中市">臺中市</option>
+                <option value="彰化縣">彰化縣</option>
+                <option value="南投縣">南投縣</option>
+                <option value="雲林縣">雲林縣</option>
+                <option value="嘉義市">嘉義市</option>
+                <option value="嘉義縣">嘉義縣</option>
+                <option value="臺南市">臺南市</option>
+                <option value="高雄市">高雄市</option>
+                <option value="屏東縣">屏東縣</option>
+                <option value="宜蘭縣">宜蘭縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="臺東縣">臺東縣</option>
+                <option value="澎湖縣">澎湖縣</option>
+                <option value="金門縣">金門縣</option>
+                <option value="連江縣">連江縣</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>孩童年齡</label>
+              <select name="entry.1726800264" required>
+                <option value="">請選擇孩童年齡</option>
+                <option value="3">3 歲</option>
+                <option value="4">4 歲</option>
+                <option value="5">5 歲</option>
+                <option value="6">6 歲</option>
+                <option value="7">7 歲</option>
+                <option value="8">8 歲</option>
+                <option value="9">9 歲</option>
+                <option value="10">10 歲</option>
+                <option value="11">11 歲</option>
+                <option value="12">12 歲</option>
+                <option value="13">13 歲</option>
+                <option value="14">14 歲</option>
+                <option value="15">15 歲</option>
+                <option value="16">16 歲</option>
+                <option value="17">17 歲</option>
+                <option value="18">18 歲</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>學校</label>
+              <input type="text" name="entry.546451915" placeholder="請輸入就讀學校" required />
+            </div>
+
+            <button class="btn-submit" type="submit">送出申請 ✨</button>
+            
+            <div id="msg"></div>
+
+            <div class="note-box">
+              💡 備註：花東離島地區暫時無法提供線上/到府預約服務，敬請見諒。
+            </div>
+          </form>
+        </aside>
+      </section>
+
+      <section id="modules">
+        <div class="section-header">
+          <h2>六大核心模組</h2>
+          <p>多元化學習內容，全方位提升孩子各項能力</p>
+        </div>
+        
+        <div class="modules-grid">
+          <div class="module-card">
+            <h3>🍎 學前水果島</h3>
+            <p>ABC拼字、量詞認知、基礎數概念，含語音朗讀與注音提示，適合學齡前兒童啟蒙學習。</p>
+          </div>
+
+          <div class="module-card">
+            <h3>🎨 八大智能</h3>
+            <p>涵蓋語言、邏輯、音樂、空間等智能訓練遊戲，搭配完整雷達分析報表，精準掌握孩子潛能。</p>
+          </div>
+
+          <div class="module-card">
+            <h3>🌏 AI雙語島</h3>
+            <p>口說與聽力全方位訓練：語音辨識、英文歌唱、拼圖與記憶遊戲，打造雙語學習環境。</p>
+          </div>
+
+          <div class="module-card">
+            <h3>👸 學測滿冠王</h3>
+            <p>具有3~6年級英文、數學的題型，可無限刷題與提供詳解。</p>
+          </div>
+
+          <div class="module-card">
+            <h3>📚 生字大辭典</h3>
+            <p>整合各大出版社教材，提供字形、字音、例句完整資訊，支援語音朗讀與智能查詢功能。</p>
+          </div>
+
+          <div class="module-card">
+            <h3>💻 AI編程島</h3>
+            <p>互動式程式教學與實作練習，提供完整章節索引與教學影片，培養邏輯思維與創造力。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="parent">
+        <div class="section-header">
+          <h2>家長控管系統</h2>
+          <p>完善的監控機制，讓家長放心、孩子安心學習</p>
+        </div>
+
+        <div class="panel-layout">
+          <div>
+            <div class="info-card">
+              <h3>核心功能</h3>
+              
+              <div class="feature-item">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-content">
+                  <strong>子帳號管理</strong>
+                  <div class="desc">家長可新增/刪除子帳號，刪除操作需輸入密碼確認，確保帳號安全。</div>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon">⏱️</div>
+                <div class="feature-content">
+                  <strong>護眼時間設定</strong>
+                  <div class="desc">彈性設定每日使用時長與休息時間，任何調整皆需密碼確認，保護孩子視力健康。</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <h3>📡 教學直播與教材</h3>
+              <p style="color:var(--muted);font-size:14px;line-height:1.7">
+                提供固定時段教學直播，錯過也不用擔心！可隨時觀看錄影回放，並支援跳轉至特定投影片章節。所有教材皆可下載PDF格式，方便列印複習使用。
+              </p>
+            </div>
+          </div>
+
+          <div class="quick-info">
+            <h3>💡 便利功能</h3>
+            <ul>
+              <li>忘記密碼可輸入公司統編快速解鎖</li>
+              <li>每次開啟App自動顯示最新版本公告</li>
+              <li>家長密碼採四位數設計，孩童無法修改</li>
+              <li>即時學習進度追蹤與統計報表</li>
+              <li>支援多子帳號切換與個別設定</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>© 2025 愛米夢境學堂 AI Learning Platform</p>
+        <p style="margin-top:8px">如需協助請掃描App內QR碼或聯絡客服團隊</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('bookForm').addEventListener('submit', function(e) {
+      setTimeout(function() {
+        const msg = document.getElementById('msg');
+        msg.textContent = '✓ 已成功送出申請！客服將於工作時間內與您聯繫。';
+        msg.className = 'show success';
+      }, 1000);
+    });
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) {
+          target.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+      });
+    });
+
+    // Add entrance animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.module-card, .feature-card, .info-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
