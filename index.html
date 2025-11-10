@@ -14,22 +14,59 @@
       --card:#fff;
       --radius:16px;
       --container:1200px;
+      --spacing-xs:8px;
+      --spacing-sm:16px;
+      --spacing-md:24px;
+      --spacing-lg:32px;
+      --spacing-xl:48px;
+      --spacing-2xl:64px;
       font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{background:linear-gradient(180deg,#def6ff 0%, #f7fbff 100%);color:#0f1724;line-height:1.6;overflow-x:hidden}
-    .wrap{max-width:var(--container);margin:0 auto;padding:0 20px}
+    body{
+      background:linear-gradient(180deg,#def6ff 0%, #f7fbff 100%);
+      color:#0f1724;
+      line-height:1.7;
+      overflow-x:hidden;
+      font-size:16px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale
+    }
+    .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--spacing-md)}
+
+    /* Typography */
+    h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;margin-bottom:var(--spacing-sm)}
+    h1{font-size:clamp(2rem, 5vw, 3rem)}
+    h2{font-size:clamp(1.5rem, 4vw, 2.25rem)}
+    h3{font-size:clamp(1.25rem, 3vw, 1.75rem)}
+    h4{font-size:clamp(1.125rem, 2.5vw, 1.5rem)}
+    p{margin-bottom:var(--spacing-md);color:var(--muted)}
+
+    /* Spacing utilities */
+    .section{margin-bottom:var(--spacing-2xl)}
+    .container{max-width:1200px;margin:0 auto;padding:0 var(--spacing-md)}
 
     /* Floating Header */
-    header{position:sticky;top:16px;z-index:100;margin-bottom:24px}
+    header{
+      position:sticky;
+      top:var(--spacing-sm);
+      z-index:1000;
+      margin-bottom:var(--spacing-lg)
+    }
     .topbar{
-      display:flex;align-items:center;gap:20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:var(--spacing-md);
       background:rgba(255,255,255,0.95);
-      backdrop-filter:blur(12px);
-      padding:16px 24px;border-radius:20px;
+      backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      padding:var(--spacing-md) var(--spacing-lg);
+      border-radius:var(--radius);
       box-shadow:0 8px 32px rgba(11,120,198,0.12), 0 2px 8px rgba(0,0,0,0.04);
-      transition:all 0.3s ease
+      transition:all 0.3s ease;
+      border:1px solid rgba(255,255,255,0.2)
     }
     .topbar:hover{box-shadow:0 12px 40px rgba(11,120,198,0.18), 0 4px 12px rgba(0,0,0,0.06)}
     
@@ -47,45 +84,80 @@
     .brand-title .title{font-weight:900;font-size:20px;color:#0f1724}
     .brand-title .sub{font-size:13px;color:var(--muted);margin-top:2px}
 
-    .nav{margin-left:auto;display:flex;gap:8px;align-items:center}
+    .nav{display:flex;gap:var(--spacing-xs);align-items:center}
     .nav a{
-      color:var(--brand);text-decoration:none;
-      padding:10px 16px;border-radius:12px;
-      font-weight:600;font-size:14px;
+      color:var(--brand);
+      text-decoration:none;
+      padding:var(--spacing-xs) var(--spacing-md);
+      border-radius:calc(var(--radius) / 2);
+      font-weight:600;
+      font-size:14px;
       background:rgba(11,120,198,0.06);
-      transition:all 0.2s
+      transition:all 0.2s ease;
+      white-space:nowrap
     }
-    .nav a:hover{background:rgba(11,120,198,0.12);transform:translateY(-1px)}
+    .nav a:hover{
+      background:rgba(11,120,198,0.12);
+      transform:translateY(-1px);
+      color:var(--brand)
+    }
     .cta{
       background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#fff;padding:12px 20px;
+      color:#fff;
+      padding:var(--spacing-sm) var(--spacing-lg);
       font-weight:800;
-      box-shadow:0 4px 16px rgba(255,123,179,0.3)
+      font-size:14px;
+      border-radius:calc(var(--radius) / 2);
+      box-shadow:0 4px 16px rgba(255,123,179,0.3);
+      transition:all 0.3s ease;
+      border:none;
+      cursor:pointer
     }
-    .cta:hover{box-shadow:0 6px 24px rgba(255,123,179,0.4);transform:translateY(-2px)}
+    .cta:hover{
+      box-shadow:0 6px 24px rgba(255,123,179,0.4);
+      transform:translateY(-2px)
+    }
 
     /* Hero Section */
     .hero{
       display:grid;
-      grid-template-columns:1.2fr 0.8fr;
-      gap:32px;
+      grid-template-columns:1.3fr 0.7fr;
+      gap:var(--spacing-xl);
       align-items:start;
-      margin:32px 0 48px
+      margin:var(--spacing-xl) 0 var(--spacing-2xl);
+      position:relative
     }
 
     .hero-main{
-      background:linear-gradient(180deg,#ffffff 0%, #fff7fb 100%);
-      border-radius:24px;
-      padding:32px;
+      background:linear-gradient(135deg,#ffffff 0%, #fff7fb 50%, #f0f9ff 100%);
+      border-radius:calc(var(--radius) * 1.5);
+      padding:var(--spacing-xl);
       box-shadow:0 20px 60px rgba(11,120,198,0.1), 0 8px 24px rgba(0,0,0,0.04);
       position:relative;
-      overflow:hidden
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.8)
     }
     .hero-main::before{
-      content:'';position:absolute;top:-50%;right:-20%;
-      width:400px;height:400px;
-      background:radial-gradient(circle,rgba(255,123,179,0.08),transparent);
-      pointer-events:none
+      content:'';
+      position:absolute;
+      top:-30%;
+      right:-10%;
+      width:300px;
+      height:300px;
+      background:radial-gradient(circle,rgba(255,123,179,0.06),transparent);
+      pointer-events:none;
+      border-radius:50%
+    }
+    .hero-main::after{
+      content:'';
+      position:absolute;
+      bottom:-20%;
+      left:-10%;
+      width:200px;
+      height:200px;
+      background:radial-gradient(circle,rgba(11,120,198,0.04),transparent);
+      pointer-events:none;
+      border-radius:50%
     }
 
     .hero-header{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:flex-start;margin-bottom:32px;position:relative}
@@ -176,40 +248,50 @@
     .booking-card h3{margin:0 0 8px;font-size:24px;font-weight:900;color:#0f1724}
     .booking-card .intro{font-size:14px;color:var(--muted);margin-bottom:24px}
 
-    /* Form Styles */
-    .field{margin-bottom:16px}
+    /* Form styling */
+    .field{margin-bottom:var(--spacing-lg)}
     .field label{
-      display:block;font-size:14px;
-      color:#0f1724;font-weight:600;
-      margin-bottom:8px
+      display:block;
+      font-size:14px;
+      color:#0f1724;
+      font-weight:600;
+      margin-bottom:var(--spacing-xs)
     }
     .field input,.field select{
-      width:100%;padding:12px 16px;
+      width:100%;
+      padding:var(--spacing-sm) var(--spacing-md);
       border:2px solid #eef7fb;
-      border-radius:12px;font-size:15px;
+      border-radius:calc(var(--radius) * 0.6);
+      font-size:15px;
       background:#fff;
-      transition:all 0.2s;
-      font-family:inherit
+      transition:all 0.2s ease;
+      font-family:inherit;
+      box-sizing:border-box
     }
     .field input:focus,.field select:focus{
       outline:none;
       border-color:var(--brand);
-      box-shadow:0 0 0 3px rgba(11,120,198,0.1)
+      box-shadow:0 0 0 3px rgba(11,120,198,0.1);
+      transform:translateY(-1px)
     }
 
     .btn-submit{
       width:100%;
       background:linear-gradient(135deg,var(--brand),#0a68b0);
-      color:#fff;padding:16px;
-      border:0;border-radius:12px;
-      font-weight:800;font-size:16px;
+      color:#fff;
+      padding:var(--spacing-md);
+      border:0;
+      border-radius:calc(var(--radius) * 0.6);
+      font-weight:800;
+      font-size:16px;
       cursor:pointer;
-      transition:all 0.3s;
-      margin-top:8px
+      transition:all 0.3s ease;
+      margin-top:var(--spacing-sm);
+      box-shadow:0 4px 16px rgba(11,120,198,0.3)
     }
     .btn-submit:hover{
       transform:translateY(-2px);
-      box-shadow:0 8px 24px rgba(11,120,198,0.3)
+      box-shadow:0 8px 24px rgba(11,120,198,0.4)
     }
 
     .note-box{
@@ -220,41 +302,68 @@
       margin-top:16px
     }
 
-    /* Modules Section - Enhanced */
-    #modules{padding:64px 0}
-    .section-header{text-align:center;margin-bottom:48px}
-    .section-header h2{
-      font-size:36px;font-weight:900;
-      margin-bottom:12px;color:#0f1724
+    /* Section styling */
+    .section-header{
+      text-align:center;
+      margin-bottom:var(--spacing-2xl);
+      position:relative
     }
-    .section-header p{color:var(--muted);font-size:16px}
+    .section-header::after{
+      content:'';
+      position:absolute;
+      bottom:-var(--spacing-md);
+      left:50%;
+      transform:translateX(-50%);
+      width:60px;
+      height:3px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      border-radius:2px
+    }
+    .section-header h2{
+      font-size:clamp(1.75rem, 4vw, 2.5rem);
+      font-weight:900;
+      margin-bottom:var(--spacing-sm);
+      color:#0f1724;
+      position:relative
+    }
+    .section-header p{
+      color:var(--muted);
+      font-size:clamp(1rem, 2vw, 1.125rem);
+      max-width:600px;
+      margin:0 auto;
+      line-height:1.6
+    }
 
     .modules-grid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:24px
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:var(--spacing-lg)
     }
     .module-card{
       background:#fff;
-      border-radius:20px;
+      border-radius:calc(var(--radius) * 1.2);
       padding:0;
       box-shadow:0 8px 32px rgba(2,6,23,0.06);
       border:2px solid rgba(11,120,198,0.06);
-      transition:all 0.3s;
+      transition:all 0.3s ease;
       position:relative;
       overflow:hidden;
       cursor:pointer
     }
     .module-card::before{
-      content:'';position:absolute;
-      top:0;left:0;right:0;height:4px;
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:4px;
       background:linear-gradient(90deg,var(--accent),var(--accent-2));
       transform:scaleX(0);
-      transition:transform 0.3s;
+      transition:transform 0.3s ease;
       z-index:1
     }
     .module-card:hover{
-      transform:translateY(-6px);
+      transform:translateY(-4px);
       box-shadow:0 16px 48px rgba(2,6,23,0.12);
       border-color:var(--brand)
     }
@@ -289,21 +398,28 @@
     }
     .module-card p{color:var(--muted);font-size:14px;line-height:1.7}
 
-    /* Parent Panel */
-    #parent{padding:64px 0;background:rgba(255,255,255,0.4);margin:48px -20px;padding-left:20px;padding-right:20px}
-    .panel-layout{
-      max-width:var(--container);margin:0 auto;
-      display:grid;grid-template-columns:1.5fr 1fr;
-      gap:32px
-    }
-    
+    /* Card styling */
     .info-card{
       background:#fff;
-      padding:32px;border-radius:20px;
+      padding:var(--spacing-xl);
+      border-radius:calc(var(--radius) * 1.2);
       box-shadow:0 8px 32px rgba(2,6,23,0.06);
-      margin-bottom:24px
+      border:1px solid rgba(11,120,198,0.06);
+      transition:all 0.3s ease;
+      position:relative;
+      overflow:hidden
     }
-    .info-card h3{font-size:24px;font-weight:800;margin-bottom:20px;color:#0f1724}
+    .info-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 48px rgba(2,6,23,0.12);
+      border-color:rgba(11,120,198,0.12)
+    }
+    .info-card h3{
+      font-size:clamp(1.25rem, 3vw, 1.5rem);
+      font-weight:800;
+      margin-bottom:var(--spacing-lg);
+      color:#0f1724
+    }
     
     .feature-item{
       display:flex;gap:16px;
@@ -345,10 +461,12 @@
     /* Footer */
     footer{
       text-align:center;
-      padding:48px 0;
+      padding:var(--spacing-2xl) 0;
       color:var(--muted);
       font-size:14px;
-      border-top:1px solid rgba(11,120,198,0.1)
+      border-top:1px solid rgba(11,120,198,0.1);
+      background:linear-gradient(135deg,rgba(255,255,255,0.8),rgba(223,246,255,0.4));
+      margin-top:var(--spacing-2xl)
     }
 
     /* Success Message */
@@ -503,29 +621,55 @@
       .video-title{font-size:14px}
     }
 
-    /* Responsive - Tablet */
-    @media (max-width:1024px){
-      .hero{grid-template-columns:1fr}
-      .booking-card{position:relative;top:0;margin-top:24px}
-      .panel-layout{grid-template-columns:1fr}
-      .modules-grid{grid-template-columns:repeat(2,1fr)}
+    /* Responsive Design */
+    /* Large screens */
+    @media (max-width:1200px){
+      .wrap{max-width:100%;padding:0 var(--spacing-md)}
+      .hero{grid-template-columns:1fr;gap:var(--spacing-lg)}
     }
 
-    /* Responsive - Mobile */
+    /* Tablet */
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr}
+      .booking-card{position:relative;top:0;margin-top:var(--spacing-lg)}
+      .panel-layout{grid-template-columns:1fr}
+      .modules-grid{grid-template-columns:repeat(2,1fr)}
+      .section{margin-bottom:var(--spacing-xl)}
+    }
+
+    /* Mobile */
     @media (max-width:768px){
-      header{top:8px;margin-bottom:16px}
-      .topbar{padding:12px 16px;border-radius:16px}
-      .logo-mark{width:48px;height:48px;border-radius:12px}
+      :root{
+        --spacing-md:12px;
+        --spacing-lg:20px;
+        --spacing-xl:28px;
+        --spacing-2xl:40px;
+      }
+
+      body{font-size:15px}
+      .wrap{padding:0 var(--spacing-sm)}
+
+      header{top:var(--spacing-xs);margin-bottom:var(--spacing-md)}
+      .topbar{
+        padding:var(--spacing-sm) var(--spacing-md);
+        border-radius:calc(var(--radius) * 0.8);
+        gap:var(--spacing-sm)
+      }
+      .logo-mark{width:44px;height:44px;border-radius:calc(var(--radius) * 0.6)}
       .brand-title .title{font-size:16px}
       .brand-title .sub{font-size:11px}
       .nav{display:none}
-      
-      .hero{margin:16px 0 32px}
-      .hero-main{padding:20px;border-radius:20px}
+
+      .hero{margin:var(--spacing-md) 0 var(--spacing-lg)}
+      .hero-main{
+        padding:var(--spacing-lg);
+        border-radius:calc(var(--radius) * 1.2)
+      }
       .hero-header{
         grid-template-columns:1fr;
         grid-template-rows:auto auto auto;
-        gap:16px
+        gap:var(--spacing-md);
+        margin-bottom:var(--spacing-xl)
       }
       .hero-image{
         width:100px;
@@ -533,72 +677,152 @@
         margin:0 auto
       }
       .hero-text{text-align:center}
-      .hero-text h1{font-size:24px}
-      .hero-text p{font-size:14px}
+      .hero-text h1{font-size:24px;margin-bottom:var(--spacing-sm)}
+      .hero-text p{font-size:15px;margin-bottom:0}
+
       .price-tag{
         text-align:center;
-        margin-top:0
+        margin-top:var(--spacing-sm)
       }
-      
-      .feature-grid{grid-template-columns:1fr;gap:16px}
-      .feature-card{padding:16px}
-      .feature-card .img-box{height:140px}
-      .feature-card h4{font-size:16px}
-      
-      .booking-card{padding:20px}
+
+      .feature-grid{grid-template-columns:1fr;gap:var(--spacing-md)}
+      .feature-card{
+        padding:var(--spacing-md);
+        border-radius:calc(var(--radius) * 0.8)
+      }
+      .feature-card .img-box{height:120px}
+      .feature-card h4{font-size:16px;margin-bottom:var(--spacing-xs)}
+      .feature-card p{font-size:14px;margin-bottom:0}
+
+      .booking-card{
+        padding:var(--spacing-lg);
+        border-radius:calc(var(--radius) * 1.2)
+      }
       .limited-badge{
-        right:16px;
-        top:16px;
+        right:var(--spacing-md);
+        top:var(--spacing-md);
         font-size:11px;
         padding:6px 12px
       }
-      .booking-card h3{font-size:20px}
-      
-      #modules{padding:48px 0}
-      .section-header h2{font-size:28px}
-      .modules-grid{grid-template-columns:1fr;gap:20px}
-      .module-image{height:180px}
-      .module-content{padding:20px}
-      .module-card h3{font-size:18px}
-      
-      #parent{padding:48px 20px;margin:32px -20px}
-      .info-card{padding:24px}
-      .feature-item{padding:12px;gap:12px}
-      .feature-icon{width:48px;height:48px;font-size:20px}
-      .quick-info{padding:20px}
-      
-      footer{padding:32px 0;font-size:13px}
+      .booking-card h3{font-size:20px;margin-bottom:var(--spacing-xs)}
+      .booking-card .intro{font-size:14px;margin-bottom:var(--spacing-lg)}
+
+      /* Modules section */
+      #modules{padding:var(--spacing-xl) 0}
+      .section-header{margin-bottom:var(--spacing-xl)}
+      .section-header h2{font-size:28px;margin-bottom:var(--spacing-sm)}
+      .section-header p{font-size:16px;margin-bottom:0}
+      .modules-grid{grid-template-columns:1fr;gap:var(--spacing-lg)}
+      .module-image{height:160px}
+      .module-content{padding:var(--spacing-lg)}
+      .module-card h3{font-size:18px;margin-bottom:var(--spacing-xs)}
+      .module-card p{font-size:14px;margin-bottom:0}
+
+      /* Parent section */
+      #parent{padding:var(--spacing-xl) var(--spacing-md);margin:var(--spacing-lg) calc(-1 * var(--spacing-md))}
+      .info-card{
+        padding:var(--spacing-lg);
+        border-radius:calc(var(--radius) * 1.2);
+        margin-bottom:var(--spacing-lg)
+      }
+      .info-card h3{font-size:20px;margin-bottom:var(--spacing-md)}
+      .feature-item{
+        padding:var(--spacing-sm);
+        border-radius:calc(var(--radius) * 0.6);
+        gap:var(--spacing-sm);
+        margin-bottom:var(--spacing-md)
+      }
+      .feature-icon{
+        width:48px;
+        height:48px;
+        border-radius:calc(var(--radius) * 0.6);
+        font-size:20px;
+        flex-shrink:0
+      }
+      .feature-content strong{display:block;margin-bottom:4px;font-size:15px}
+      .feature-content .desc{font-size:13px;margin:0}
+
+      .quick-info{
+        padding:var(--spacing-lg);
+        border-radius:calc(var(--radius) * 1.2)
+      }
+      .quick-info h3{font-size:18px;margin-bottom:var(--spacing-sm)}
+      .quick-info li{
+        padding:var(--spacing-sm) 0;
+        font-size:14px
+      }
+
+      /* Comparison table */
+      .comparison-table{font-size:12px}
+      .comparison-table th,
+      .comparison-table td{padding:12px 8px}
+
+      /* Awards section */
+      #awards .info-card{
+        padding:var(--spacing-lg);
+        margin-bottom:var(--spacing-md)
+      }
+      #awards .info-card h3{font-size:18px;margin-bottom:var(--spacing-xs)}
+
+      footer{
+        padding:var(--spacing-xl) 0;
+        font-size:13px;
+        text-align:center
+      }
     }
 
-    /* Extra Small Mobile */
+    /* Small mobile */
     @media (max-width:480px){
-      .wrap{padding:0 16px}
-      .topbar{padding:10px 12px;gap:12px}
-      .logo-mark{width:40px;height:40px}
+      :root{
+        --spacing-sm:8px;
+        --spacing-md:12px;
+        --spacing-lg:16px;
+        --spacing-xl:20px;
+        --spacing-2xl:28px;
+      }
+
+      body{font-size:14px}
+      .wrap{padding:0 var(--spacing-xs)}
+
+      .topbar{
+        padding:var(--spacing-xs) var(--spacing-sm);
+        gap:var(--spacing-xs)
+      }
+      .logo-mark{width:36px;height:36px}
       .brand-title .title{font-size:14px}
       .brand-title .sub{display:none}
-      
-      .hero-main{padding:16px}
+
+      .hero{margin:var(--spacing-sm) 0 var(--spacing-md)}
+      .hero-main{padding:var(--spacing-md)}
       .hero-text h1{font-size:20px}
+      .hero-text p{font-size:14px}
+
       .price-tag .amount{font-size:24px}
-      
+      .price-tag .label{font-size:12px}
+
+      .feature-card .img-box{height:100px}
       .feature-card h4{font-size:15px}
-      .feature-card p{font-size:13px}
-      
-      .booking-card{padding:16px;border-radius:20px}
+
+      .booking-card{padding:var(--spacing-md)}
       .booking-card h3{font-size:18px}
       .booking-card .intro{font-size:13px}
-      
+
       .section-header h2{font-size:24px}
       .section-header p{font-size:14px}
-      
-      .module-image{height:160px}
-      .module-content{padding:16px}
-      
-      .info-card{padding:20px}
-      .info-card h3{font-size:20px}
-      .feature-content strong{font-size:15px}
-      .feature-content .desc{font-size:13px}
+
+      .module-image{height:140px}
+      .module-content{padding:var(--spacing-md)}
+      .module-card h3{font-size:16px}
+
+      .info-card{padding:var(--spacing-md)}
+      .info-card h3{font-size:18px}
+      .feature-content strong{font-size:14px}
+      .feature-content .desc{font-size:12px}
+
+      .quick-info{padding:var(--spacing-md)}
+      .quick-info h3{font-size:16px}
+
+      #awards .info-card h3{font-size:16px}
     }
   </style>
 </head>
@@ -618,6 +842,8 @@
         <nav class="nav">
           <a href="#modules">課程模組</a>
           <a href="#parent">家長控管</a>
+          <a href="#comparison">市場比較</a>
+          <a href="#awards">榮譽認證</a>
           <a href="#booking">立即預約</a>
           <a class="cta" href="#booking">優惠體驗✨</a>
         </nav>
@@ -633,7 +859,7 @@
             </div>
             <div class="hero-text">
               <h1>益智好腦力 × AI學習力</h1>
-              <p>遊戲化任務、八大智能分析、個別化教學建議與1對1報告解說,讓孩子在玩樂中激發潛能。</p>
+              <p>遊戲化任務、八大智能分析、個別化教學建議與1對1報告解說，讓孩子在玩樂中激發潛能。</p>
             </div>
             <div class="price-tag">
               <div class="amount">體驗價NT$980</div>
@@ -679,7 +905,7 @@
         <aside class="booking-card" id="booking">
           <div class="limited-badge">限量預約</div>
           <h3>立即預約免費體驗</h3>
-          <p class="intro">預約即享:八大智能檢測報告、學習風格分析與專人1對1解說(名額有限)</p>
+          <p class="intro">預約即享:八大智能檢測報告、學習風格分析與專人1對1解說(名額有限)。榮獲2023總統教育獎與2025國家品牌玉山獎，超過10萬家長信賴的學習平台！</p>
 
           <form id="bookForm" action="https://docs.google.com/forms/d/e/1FAIpQLScOOLHKquqDo_nup6p9472JTHR-I8EhgKTQv__obftwwRoV5w/formResponse" method="POST" target="_blank">
             <div class="field">
@@ -801,7 +1027,7 @@
             </div>
             <div class="module-content">
               <h3>🌏 AI雙語島</h3>
-              <p>口說與聽力全方位訓練:語音辨識、英文歌唱、拼圖與記憶遊戲,打造雙語學習環境。</p>
+              <p>採用英國標準發音與教學方法，培養地道英語表達能力與文化理解。</p>
             </div>
           </div>
 
@@ -834,7 +1060,7 @@
             </div>
             <div class="module-content">
               <h3>💻 AI編程島</h3>
-              <p>互動式程式教學與實作練習,提供完整章節索引與教學影片,培養邏輯思維與創造力。</p>
+              <p>基於微軟技術架構的程式課程，學習業界標準工具與邏輯思維。</p>
             </div>
           </div>
         </div>
@@ -889,8 +1115,227 @@
         </div>
       </section>
 
-      <footer>
-        <p>© 2025 愛米夢境學堂 AI Learning Platform</p>
+      <section id="awards" style="padding:64px 0;background:linear-gradient(135deg,rgba(255,123,179,0.05),rgba(255,154,60,0.05));margin:48px -20px;padding-left:20px;padding-right:20px">
+        <div class="section-header">
+          <h2>🏆 榮譽認證與專業背書</h2>
+          <p>多年來獲得政府與業界肯定，打造值得信賴的學習平台</p>
+        </div>
+
+        <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+          <div class="info-card" style="text-align:center">
+            <div style="font-size:48px;margin-bottom:16px">🥇</div>
+            <h3 style="color:var(--brand);margin-bottom:12px">2023 總統教育獎</h3>
+            <p style="color:var(--muted);font-size:14px">國家級教育創新肯定，表彰在兒童教育領域的卓越貢獻</p>
+          </div>
+
+          <div class="info-card" style="text-align:center">
+            <div style="font-size:48px;margin-bottom:16px">🏅</div>
+            <h3 style="color:var(--brand);margin-bottom:12px">2025 國家品牌玉山獎</h3>
+            <p style="color:var(--muted);font-size:14px">台灣最具代表性品牌獎項，象徵創新與品質的最高榮譽</p>
+          </div>
+
+          <div class="info-card" style="text-align:center">
+            <div style="font-size:48px;margin-bottom:16px">🎖️</div>
+            <h3 style="color:var(--brand);margin-bottom:12px">2020 發明競賽銀牌</h3>
+            <p style="color:var(--muted);font-size:14px">技術創新突破，獲國際發明競賽肯定</p>
+          </div>
+
+          <div class="info-card" style="text-align:center">
+            <div style="font-size:48px;margin-bottom:16px">📈</div>
+            <h3 style="color:var(--brand);margin-bottom:12px">2021 上櫃市推薦</h3>
+            <p style="color:var(--muted);font-size:14px">資本市場認可，展現企業成長潛力與穩定發展</p>
+          </div>
+
+          <div class="info-card" style="text-align:center">
+            <div style="font-size:48px;margin-bottom:16px">💼</div>
+            <h3 style="color:var(--brand);margin-bottom:12px">2022 IPO 櫃號取得</h3>
+            <p style="color:var(--muted);font-size:14px">成功上市，奠定企業長期發展基礎</p>
+          </div>
+
+          <div class="info-card" style="text-align:center">
+            <div style="font-size:48px;margin-bottom:16px">🏆</div>
+            <h3 style="color:var(--brand);margin-bottom:12px">2024 金峰獎</h3>
+            <p style="color:var(--muted);font-size:14px">資訊月百大創新產品，技術領先的市場認證</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding:64px 0;background:linear-gradient(135deg,rgba(11,120,198,0.05),rgba(255,154,60,0.05));margin:48px -20px;padding-left:20px;padding-right:20px">
+        <div class="section-header">
+          <h2>✨ 我們的強大優勢</h2>
+          <p>全方位學習生態，超越傳統教育框架</p>
+        </div>
+
+        <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(350px,1fr));gap:32px">
+          <div class="info-card">
+            <h3 style="color:var(--brand);margin-bottom:20px">📚 課綱完美對應</h3>
+            <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:16px">
+              緊密整合108新課綱要求，同步各大出版社教材內容，確保學習內容與學校教學完全接軌，讓孩子在遊戲中掌握課本知識。
+            </p>
+            <div style="background:rgba(11,120,198,0.1);padding:12px;border-radius:8px;font-size:13px;color:var(--brand);font-weight:600">
+              ✅ 生字大辭典即時查詢<br>
+              ✅ 學科版本智能切換<br>
+              ✅ 學校進度完美同步
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3 style="color:var(--brand);margin-bottom:20px">👨‍👩‍👧‍👦 家長可視化成效</h3>
+            <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:16px">
+              完整的學習追蹤系統，讓家長隨時掌握孩子學習狀況，定期收到個人化進度報表與成長建議。
+            </p>
+            <div style="background:rgba(255,123,179,0.1);padding:12px;border-radius:8px;font-size:13px;color:var(--accent);font-weight:600">
+              ✅ 子帳號安全管理<br>
+              ✅ 護眼時間智能控制<br>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3 style="color:var(--brand);margin-bottom:20px">🎮 遊戲化＋直播互動</h3>
+            <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:16px">
+              將學習轉化為有趣的遊戲體驗，搭配即時直播課程與回放功能，維持孩子持續學習的熱情。
+            </p>
+            <div style="background:rgba(255,154,60,0.1);padding:12px;border-radius:8px;font-size:13px;color:var(--accent-2);font-weight:600">
+              ✅ 挑戰性遊戲任務<br>
+              ✅ 直播課程＋隨時回放<br>
+              ✅ AI互動學習體驗
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3 style="color:var(--brand);margin-bottom:20px">🔬 AI個人化學習</h3>
+            <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:16px">
+              運用先進AI技術分析學習行為，提供個別化學習路徑與即時回饋，最大化學習成效。
+            </p>
+            <div style="background:linear-gradient(135deg,rgba(11,120,198,0.1),rgba(255,123,179,0.1));padding:12px;border-radius:8px;font-size:13px;color:var(--brand);font-weight:600">
+              ✅ 智能學習診斷<br>
+              ✅ 個人化推進任務<br>
+              ✅ 語音辨識互動遊戲
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="comparison" style="padding:64px 0;background:linear-gradient(135deg,rgba(255,255,255,0.8),rgba(223,246,255,0.8));margin:48px -20px;padding-left:20px;padding-right:20px">
+        <div class="section-header">
+          <h2>📊 市場橫向比較</h2>
+          <p>為什麼家長選擇我們？讓數據說話</p>
+        </div>
+
+        <div style="max-width:1200px;margin:0 auto;">
+          <div style="background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 8px 32px rgba(2,6,23,0.06);border:2px solid rgba(11,120,198,0.08)">
+            <h3 style="color:var(--brand);text-align:center;margin-bottom:24px;font-size:24px">學習平台核心功能比較</h3>
+
+            <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px">
+              <table style="width:100%;border-collapse:collapse;font-size:14px;min-width:600px">
+                <thead>
+                  <tr style="background:linear-gradient(135deg,var(--brand),#0a68b0);color:#fff">
+                    <th style="padding:16px 12px;text-align:left;border-radius:8px 0 0 0;font-weight:700;min-width:120px">功能面向</th>
+                    <th style="padding:16px 12px;text-align:center;font-weight:800;min-width:140px">愛米·夢境學堂</th>
+                    <th style="padding:16px 12px;text-align:center;min-width:120px">C某學院</th>
+                    <th style="padding:16px 12px;text-align:center;min-width:120px">傳統學習機品牌</th>
+                    <th style="padding:16px 12px;text-align:center;border-radius:0 8px 0 0;min-width:120px">某美語品牌</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background:#f8fafc">
+                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">🎯 個人化學習路徑</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ AI智能診斷＋動態調整</td>
+                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 基礎分級</td>
+                    <td style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 固定內容</td>
+                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 手動選擇</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">📚 108課綱對應</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 完整整合＋即時更新</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 基本對應</td>
+                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 部分支援</td>
+                    <td style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 弱相關</td>
+                  </tr>
+                  <tr style="background:#f8fafc">
+                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">👨‍👩‍👧‍👦 家長控制權限</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 完整視覺化＋即時監控</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 基本功能</td>
+                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 依設備版本</td>
+                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 有限功能</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">🎮 遊戲化體驗</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 互動任務＋成就系統</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 動畫課程</td>
+                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 基礎互動</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 多媒體內容</td>
+                  </tr>
+                  <tr style="background:#f8fafc">
+                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">📡 直播互動教學</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 即時直播＋隨時回放</td>
+                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 部分課程</td>
+                    <td style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 不支援</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 線上課程</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">🌐 離線學習支援</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ PDF下載＋離線模式</td>
+                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 有限下載</td>
+                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 專用設備</td>
+                    <td style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 需網路</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div style="margin-top:24px;padding:20px;background:linear-gradient(135deg,rgba(11,120,198,0.05),rgba(255,123,179,0.05));border-radius:12px;border:1px solid rgba(11,120,198,0.1)">
+              <h4 style="color:var(--brand);margin-bottom:12px;font-size:18px">💡 為什麼家長更選擇我們？</h4>
+              <ul style="color:var(--muted);font-size:14px;line-height:1.8;margin:0;padding-left:20px">
+                <li><strong>全方位生態：</strong>不僅是學習工具，更是完整的家庭教育解決方案</li>
+                <li><strong>在地化優勢：</strong>完美對應台灣108課綱，內容更貼近學校教學</li>
+                <li><strong>AI智慧加持：</strong>真正的個人化學習體驗，學習效果看得見</li>
+                <li><strong>家長放心：</strong>完整的監控系統，讓學習變得更有保障</li>
+                <li><strong>高性價比：</strong>體驗價NT$980，原價NT$3,980，物超所值</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding:48px 0;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#1a1a1a;margin:24px -20px;padding-left:20px;padding-right:20px">
+        <div style="max-width:1200px;margin:0 auto;text-align:center">
+          <h2 style="font-size:32px;font-weight:900;margin-bottom:16px;text-shadow:0 2px 8px rgba(0,0,0,0.2)">🎯 我們的獨特價值</h2>
+          <p style="font-size:18px;margin-bottom:32px;color:#2d2d2d">不只是學習工具，更是您孩子成長的最佳夥伴</p>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:32px">
+            <div style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
+              <div style="font-size:48px;margin-bottom:16px">🚀</div>
+              <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;color:#1a1a1a">AI智慧學習</h3>
+              <p style="font-size:14px;color:#4a4a4a">真正的個人化學習體驗，AI動態調整學習難度與內容</p>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
+              <div style="font-size:48px;margin-bottom:16px">🏆</div>
+              <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;color:#1a1a1a">國家級肯定</h3>
+              <p style="font-size:14px;color:#4a4a4a">榮獲2023總統教育獎、2025國家品牌玉山獎，品質有保障</p>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
+              <div style="font-size:48px;margin-bottom:16px">💝</div>
+              <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;color:#1a1a1a">家長最放心</h3>
+              <p style="font-size:14px;color:#4a4a4a">完整家長控管系統，學習進度與成效一目了然</p>
+            </div>
+
+            <div style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
+              <div style="font-size:48px;margin-bottom:16px">🌟</div>
+              <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;color:#1a1a1a">全方位生態</h3>
+              <p style="font-size:14px;color:#4a4a4a">從學前到小學，遊戲化學習＋直播互動＋離線支援</p>
+            </div>
+          </div>
+
+          <div style="margin-top:40px;padding:24px;background:rgba(255,255,255,0.15);border-radius:20px;backdrop-filter:blur(10px)">
+            <p style="font-size:16px;font-weight:600;margin-bottom:8px;color:#1a1a1a">💡 家長真心話</p>
+            <p style="font-size:14px;color:#4a4a4a">"愛米不只是學習平台，更是我們家庭教育的好幫手！孩子愛玩，我們放心。"</p>
+          </div>
+        </div>
+      </section>
+        <p style="text-align:center">© 2025 愛米夢境學堂 AI Learning Platform</p>
       </footer>
     </main>
   </div>
