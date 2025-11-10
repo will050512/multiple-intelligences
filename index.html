@@ -823,17 +823,38 @@
         font-size:14px;
       }
 
-      /* Comparison table */
-      .comparison-table{font-size:12px}
-      .comparison-table th,
-      .comparison-table td{padding:12px 8px}
-
-      /* Awards section */
-      #awards .info-card{
-        padding:var(--spacing-lg);
-        margin-bottom:var(--spacing-md)
+      /* Comparison table mobile optimization */
+      .comparison-table{
+        font-size:11px;
+        min-width:500px; /* Reduced from 600px for better mobile experience */
       }
-      #awards .info-card h3{font-size:18px;margin-bottom:var(--spacing-xs)}
+      .comparison-table th,
+      .comparison-table td{
+        padding:8px 4px;
+        white-space:nowrap;
+      }
+      .comparison-table th{
+        font-size:10px;
+      }
+
+      /* Awards section mobile optimization */
+      .awards-grid{
+        grid-template-columns:1fr !important;
+        gap:var(--spacing-md) !important;
+      }
+      .awards-grid .info-card{
+        padding:var(--spacing-md);
+        margin-bottom:var(--spacing-md);
+        min-height:auto;
+      }
+      .awards-grid .info-card h3{
+        font-size:16px;
+        margin-bottom:8px;
+      }
+      .awards-grid .info-card p{
+        font-size:13px;
+        line-height:1.4;
+      }
 
       footer{
         padding:var(--spacing-xl) 0;
@@ -885,8 +906,27 @@
       .module-card h3{font-size:16px;margin-bottom:6px}
       .module-card p{font-size:13px;margin-bottom:0}
 
-      /* Better button sizing for small screens */
-      button{min-height:44px;font-size:15px}
+      /* Value section mobile optimization */
+      .value-grid{
+        grid-template-columns:1fr !important;
+        gap:var(--spacing-md) !important;
+        margin-top:var(--spacing-lg) !important;
+      }
+      .value-card{
+        padding:var(--spacing-md) !important;
+        border-radius:calc(var(--radius) * 0.8) !important;
+      }
+      .value-card div[style*="font-size:48px"]{
+        font-size:32px !important;
+        margin-bottom:12px !important;
+      }
+      .value-card h3{
+        font-size:16px !important;
+        margin-bottom:8px !important;
+      }
+      .value-card p{
+        font-size:13px !important;
+      }
       .hero-main{padding:var(--spacing-md)}
       .hero-text h1{font-size:20px}
       .hero-text p{font-size:14px}
@@ -900,6 +940,43 @@
       .booking-card{padding:var(--spacing-md)}
       .booking-card h3{font-size:18px}
       .booking-card .intro{font-size:13px}
+
+      /* Awards section extreme mobile optimization */
+      #awards{
+        padding:var(--spacing-lg) var(--spacing-sm);
+      }
+      #awards .section-header h2{
+        font-size:20px;
+        margin-bottom:8px;
+      }
+      #awards .section-header p{
+        font-size:13px;
+      }
+      .awards-grid .info-card{
+        padding:var(--spacing-sm);
+        margin-bottom:var(--spacing-sm);
+      }
+      .awards-grid .info-card div[style*="font-size:48px"]{
+        font-size:36px !important;
+        margin-bottom:12px !important;
+      }
+      .awards-grid .info-card h3{
+        font-size:14px;
+        margin-bottom:6px;
+      }
+      .awards-grid .info-card p{
+        font-size:12px;
+      }
+
+      /* Comparison table extreme mobile optimization */
+      .comparison-table{
+        font-size:10px;
+        min-width:450px; /* Further reduced for very small screens */
+      }
+      .comparison-table th,
+      .comparison-table td{
+        padding:6px 3px;
+      }
 
       .section-header h2{font-size:24px}
       .section-header p{font-size:14px}
@@ -1215,19 +1292,7 @@
           <p>多年來獲得政府與業界肯定，打造值得信賴的學習平台</p>
         </div>
 
-        <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
-          <div class="info-card" style="text-align:center">
-            <div style="font-size:48px;margin-bottom:16px">🥇</div>
-            <h3 style="color:var(--brand);margin-bottom:12px">2023 總統教育獎</h3>
-            <p style="color:var(--muted);font-size:14px">國家級教育創新肯定，表彰在兒童教育領域的卓越貢獻</p>
-          </div>
-
-          <div class="info-card" style="text-align:center">
-            <div style="font-size:48px;margin-bottom:16px">🏅</div>
-            <h3 style="color:var(--brand);margin-bottom:12px">2025 國家品牌玉山獎</h3>
-            <p style="color:var(--muted);font-size:14px">台灣最具代表性品牌獎項，象徵創新與品質的最高榮譽</p>
-          </div>
-
+        <div class="awards-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
           <div class="info-card" style="text-align:center">
             <div style="font-size:48px;margin-bottom:16px">🎖️</div>
             <h3 style="color:var(--brand);margin-bottom:12px">2020 發明競賽銀牌</h3>
@@ -1247,9 +1312,21 @@
           </div>
 
           <div class="info-card" style="text-align:center">
+            <div style="font-size:48px;margin-bottom:16px">🥇</div>
+            <h3 style="color:var(--brand);margin-bottom:12px">2023 總統教育獎</h3>
+            <p style="color:var(--muted);font-size:14px">國家級教育創新肯定，表彰在兒童教育領域的卓越貢獻</p>
+          </div>
+
+          <div class="info-card" style="text-align:center">
             <div style="font-size:48px;margin-bottom:16px">🏆</div>
             <h3 style="color:var(--brand);margin-bottom:12px">2024 金峰獎</h3>
             <p style="color:var(--muted);font-size:14px">資訊月百大創新產品，技術領先的市場認證</p>
+          </div>
+
+          <div class="info-card" style="text-align:center">
+            <div style="font-size:48px;margin-bottom:16px">🏆</div>
+            <h3 style="color:var(--brand);margin-bottom:12px">2025 國家品牌玉山獎</h3>
+            <p style="color:var(--muted);font-size:14px">台灣最具代表性品牌獎項，象徵創新與品質的最高榮譽</p>
           </div>
         </div>
       </section>
@@ -1397,26 +1474,26 @@
           <h2 style="font-size:32px;font-weight:900;margin-bottom:16px;text-shadow:0 2px 8px rgba(0,0,0,0.2)">🎯 我們的獨特價值</h2>
           <p style="font-size:18px;margin-bottom:32px;color:#2d2d2d">不只是學習工具，更是您孩子成長的最佳夥伴</p>
 
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:32px">
-            <div style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
+          <div class="value-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:24px">
+            <div class="value-card" style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
               <div style="font-size:48px;margin-bottom:16px">🚀</div>
               <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;color:#1a1a1a">AI智慧學習</h3>
               <p style="font-size:14px;color:#4a4a4a">真正的個人化學習體驗，AI動態調整學習難度與內容</p>
             </div>
 
-            <div style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
+            <div class="value-card" style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
               <div style="font-size:48px;margin-bottom:16px">🏆</div>
               <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;color:#1a1a1a">國家級肯定</h3>
               <p style="font-size:14px;color:#4a4a4a">榮獲2023總統教育獎、2025國家品牌玉山獎，品質有保障</p>
             </div>
 
-            <div style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
+            <div class="value-card" style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
               <div style="font-size:48px;margin-bottom:16px">💝</div>
               <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;color:#1a1a1a">家長最放心</h3>
               <p style="font-size:14px;color:#4a4a4a">完整家長控管系統，學習進度與成效一目了然</p>
             </div>
 
-            <div style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
+            <div class="value-card" style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
               <div style="font-size:48px;margin-bottom:16px">🌟</div>
               <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;color:#1a1a1a">全方位生態</h3>
               <p style="font-size:14px;color:#4a4a4a">從學前到小學，遊戲化學習＋直播互動＋離線支援</p>
