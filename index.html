@@ -27,6 +27,8 @@
     html{
       scroll-behavior:smooth;
       -webkit-overflow-scrolling:touch;
+      overflow-x:hidden;
+      width:100%;
     }
 
     /* Prevent horizontal scroll */
@@ -39,9 +41,28 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       width:100%;
+      max-width:100vw;
       min-height:100vh;
     }
-    .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--spacing-md)}
+    .wrap{max-width:var(--container);margin:0 auto;padding:0 var(--spacing-md);width:100%;box-sizing:border-box;}
+    
+    /* 確保所有主要容器都不會超出螢幕 */
+    section,div,article,aside,main{
+      box-sizing:border-box;
+      max-width:100%;
+    }
+    
+    /* 圖片響應式處理 */
+    img,video,iframe{
+      max-width:100%;
+      height:auto;
+    }
+    
+    /* 防止長文字溢出 */
+    p,h1,h2,h3,h4,h5,h6,li,span{
+      word-wrap:break-word;
+      overflow-wrap:break-word;
+    }
 
     /* Typography */
     h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;margin-bottom:var(--spacing-sm)}
@@ -95,7 +116,10 @@
       border-radius:var(--radius);
       box-shadow:0 8px 32px rgba(11,120,198,0.12), 0 2px 8px rgba(0,0,0,0.04);
       transition:all 0.3s ease;
-      border:1px solid rgba(255,255,255,0.2)
+      border:1px solid rgba(255,255,255,0.2);
+      width:100%;
+      max-width:100%;
+      box-sizing:border-box;
     }
     .topbar:hover{box-shadow:0 12px 40px rgba(11,120,198,0.18), 0 4px 12px rgba(0,0,0,0.06)}
     
@@ -140,7 +164,10 @@
       box-shadow:0 4px 16px rgba(255,123,179,0.3);
       transition:all 0.3s ease;
       border:none;
-      cursor:pointer
+      cursor:pointer;
+      white-space:nowrap;
+      text-decoration:none;
+      display:inline-block;
     }
     .cta:hover{
       box-shadow:0 6px 24px rgba(255,123,179,0.4);
@@ -154,7 +181,9 @@
       gap:var(--spacing-xl);
       align-items:start;
       margin:var(--spacing-xl) 0 var(--spacing-2xl);
-      position:relative
+      position:relative;
+      width:100%;
+      max-width:100%;
     }
 
     .hero-main{
@@ -164,7 +193,10 @@
       box-shadow:0 20px 60px rgba(11,120,198,0.1), 0 8px 24px rgba(0,0,0,0.04);
       position:relative;
       overflow:hidden;
-      border:1px solid rgba(255,255,255,0.8)
+      border:1px solid rgba(255,255,255,0.8);
+      width:100%;
+      max-width:100%;
+      box-sizing:border-box;
     }
     .hero-main::before{
       content:'';
@@ -233,7 +265,9 @@
       border-radius:16px;padding:20px;
       border:1px solid rgba(11,120,198,0.08);
       box-shadow:0 4px 16px rgba(11,120,198,0.04);
-      transition:all 0.3s
+      transition:all 0.3s;
+      width:100%;
+      min-width:0; /* 防止內容撐開 */
     }
     .feature-card:hover{
       transform:translateY(-4px);
@@ -242,7 +276,8 @@
     .feature-card h4{
       color:var(--brand);
       font-size:18px;font-weight:800;
-      margin-bottom:12px
+      margin-bottom:12px;
+      word-wrap:break-word; /* 允許文字換行 */
     }
     .feature-card .img-box{
       width:100%;height:160px;
@@ -254,14 +289,55 @@
       justify-content:center
     }
     .feature-card img{width:100%;height:100%;object-fit:cover}
-    .feature-card p{color:var(--muted);font-size:14px;line-height:1.6}
+    .feature-card p{color:var(--muted);font-size:14px;line-height:1.6;word-wrap:break-word;}
+
+    /* Comparison Table - Desktop styles */
+    .table-container{
+      width:100%;
+      max-width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    .comparison-table{
+      width:100%;
+      border-collapse:collapse;
+    }
+    .comparison-table thead{
+      display:table-header-group;
+    }
+    .comparison-table tbody{
+      display:table-row-group;
+    }
+    .comparison-table tr{
+      display:table-row;
+      margin-bottom:0;
+      border:none;
+    }
+    .comparison-table th,
+    .comparison-table td{
+      display:table-cell;
+      padding:16px 12px;
+    }
+    .comparison-table td:before{
+      content:none; /* 桌面版不顯示標籤 */
+    }
+    
+    /* 在大螢幕上，表格正常顯示 */
+    @media (min-width:769px){
+      .table-container{
+        overflow-x:auto;
+      }
+    }
 
     /* Booking Card */
     .booking-card{
       background:linear-gradient(180deg,#fff 0%,#fffaf5 100%);
       border-radius:24px;padding:28px;
       box-shadow:0 20px 60px rgba(15,23,36,0.1), 0 8px 24px rgba(0,0,0,0.04);
-      position:sticky;top:120px
+      position:sticky;top:120px;
+      width:100%;
+      max-width:100%;
+      box-sizing:border-box;
     }
     .limited-badge{
       position:absolute;right:24px;top:24px;
@@ -365,8 +441,9 @@
 
     .modules-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:var(--spacing-lg)
+      grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));
+      gap:var(--spacing-lg);
+      width:100%;
     }
     .module-card{
       background:#fff;
@@ -377,7 +454,9 @@
       transition:all 0.3s ease;
       position:relative;
       overflow:hidden;
-      cursor:pointer
+      cursor:pointer;
+      width:100%;
+      max-width:100%;
     }
     .module-card::before{
       content:'';
@@ -725,14 +804,21 @@
         margin-top:var(--spacing-sm)
       }
 
-      .feature-grid{grid-template-columns:1fr;gap:var(--spacing-md)}
+      .feature-grid{
+        grid-template-columns:1fr;
+        gap:var(--spacing-md);
+        width:100%;
+      }
       .feature-card{
         padding:var(--spacing-md);
-        border-radius:calc(var(--radius) * 0.8)
+        border-radius:calc(var(--radius) * 0.8);
+        width:100%;
+        max-width:100%;
+        overflow:hidden;
       }
-      .feature-card .img-box{height:120px}
-      .feature-card h4{font-size:16px;margin-bottom:var(--spacing-xs)}
-      .feature-card p{font-size:14px;margin-bottom:0}
+      .feature-card .img-box{height:120px;width:100%;}
+      .feature-card h4{font-size:16px;margin-bottom:var(--spacing-xs);word-wrap:break-word;}
+      .feature-card p{font-size:14px;margin-bottom:0;word-wrap:break-word;}
 
       .booking-card{
         padding:var(--spacing-lg);
@@ -825,16 +911,80 @@
 
       /* Comparison table mobile optimization */
       .comparison-table{
-        font-size:11px;
-        min-width:500px; /* Reduced from 600px for better mobile experience */
+        font-size:10px;
+        min-width:100%;
+        display:block;
+        width:100%;
+      }
+      .comparison-table thead,
+      .comparison-table tbody,
+      .comparison-table tr{
+        display:block;
+        width:100%;
+      }
+      .comparison-table tr{
+        margin-bottom:16px;
+        border:2px solid #e2e8f0;
+        border-radius:12px;
+        overflow:hidden;
+        background:#fff;
+        box-shadow:0 2px 8px rgba(0,0,0,0.08);
       }
       .comparison-table th,
       .comparison-table td{
-        padding:8px 4px;
-        white-space:nowrap;
+        padding:10px 12px;
+        display:block;
+        text-align:left !important;
+        white-space:normal;
+        word-wrap:break-word;
+        word-break:break-word;
+        border:none;
       }
       .comparison-table th{
-        font-size:10px;
+        font-size:12px;
+        background:var(--brand) !important;
+        color:#fff !important;
+        padding:12px;
+      }
+      .comparison-table tbody tr th:first-child{
+        font-weight:700;
+        background:linear-gradient(135deg,#f8fafc,#e8f4f8) !important;
+        color:var(--brand) !important;
+        font-size:13px;
+        border-bottom:2px solid rgba(11,120,198,0.1);
+      }
+      .comparison-table td:before{
+        content:attr(data-label);
+        font-weight:700;
+        display:block;
+        margin-bottom:4px;
+        color:var(--brand);
+        font-size:11px;
+      }
+      .comparison-table thead{
+        display:none;
+      }
+      /* 表格容器優化 */
+      .table-container{
+        overflow-x:visible !important;
+        overflow-y:visible !important;
+        width:100% !important;
+        max-width:100% !important;
+      }
+      .comparison-table + div,
+      section > div > div{
+        width:100%;
+        max-width:100%;
+        overflow:hidden;
+      }
+      /* 確保表格父容器不會造成滾動 */
+      section > div{
+        width:100%;
+        max-width:100%;
+        overflow:hidden;
+        padding-left:var(--spacing-sm);
+        padding-right:var(--spacing-sm);
+        box-sizing:border-box;
       }
 
       /* Awards section mobile optimization */
@@ -970,12 +1120,23 @@
 
       /* Comparison table extreme mobile optimization */
       .comparison-table{
-        font-size:10px;
-        min-width:450px; /* Further reduced for very small screens */
+        font-size:11px;
+        min-width:100%;
       }
       .comparison-table th,
       .comparison-table td{
-        padding:6px 3px;
+        padding:8px 10px;
+      }
+      .comparison-table td:before{
+        font-size:10px;
+        margin-bottom:3px;
+      }
+      .comparison-table tbody tr th:first-child{
+        font-size:12px;
+        padding:10px;
+      }
+      .comparison-table tr{
+        margin-bottom:12px;
       }
 
       .section-header h2{font-size:24px}
@@ -1292,7 +1453,7 @@
           <p>多年來獲得政府與業界肯定，打造值得信賴的學習平台</p>
         </div>
 
-        <div class="awards-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px">
+        <div class="awards-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:20px">
           <div class="info-card" style="text-align:center">
             <div style="font-size:48px;margin-bottom:16px">🎖️</div>
             <h3 style="color:var(--brand);margin-bottom:12px">2020 發明競賽銀牌</h3>
@@ -1394,62 +1555,62 @@
         </div>
 
         <div style="max-width:1200px;margin:0 auto;">
-          <div style="background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 8px 32px rgba(2,6,23,0.06);border:2px solid rgba(11,120,198,0.08)">
+          <div style="background:#fff;border-radius:16px;padding:32px;margin-bottom:24px;box-shadow:0 8px 32px rgba(2,6,23,0.06);border:2px solid rgba(11,120,198,0.08);width:100%;max-width:100%;box-sizing:border-box;">
             <h3 style="color:var(--brand);text-align:center;margin-bottom:24px;font-size:24px">學習平台核心功能比較</h3>
 
-            <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px">
-              <table style="width:100%;border-collapse:collapse;font-size:14px;min-width:600px">
+            <div class="table-container" style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;width:100%;max-width:100%;">
+              <table class="comparison-table" style="width:100%;border-collapse:collapse;font-size:14px;">
                 <thead>
                   <tr style="background:linear-gradient(135deg,var(--brand),#0a68b0);color:#fff">
-                    <th style="padding:16px 12px;text-align:left;border-radius:8px 0 0 0;font-weight:700;min-width:120px">功能面向</th>
-                    <th style="padding:16px 12px;text-align:center;font-weight:800;min-width:140px">愛米·夢境學堂</th>
-                    <th style="padding:16px 12px;text-align:center;min-width:120px">C某學院</th>
-                    <th style="padding:16px 12px;text-align:center;min-width:120px">傳統學習機品牌</th>
-                    <th style="padding:16px 12px;text-align:center;border-radius:0 8px 0 0;min-width:120px">某美語品牌</th>
+                    <th style="padding:16px 12px;text-align:left;border-radius:8px 0 0 0;font-weight:700;">功能面向</th>
+                    <th style="padding:16px 12px;text-align:center;font-weight:800;">愛米·夢境學堂</th>
+                    <th style="padding:16px 12px;text-align:center;">C某學院</th>
+                    <th style="padding:16px 12px;text-align:center;">傳統學習機品牌</th>
+                    <th style="padding:16px 12px;text-align:center;border-radius:0 8px 0 0;">某美語品牌</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr style="background:#f8fafc">
-                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">🎯 個人化學習路徑</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ AI智能診斷＋動態調整</td>
-                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 基礎分級</td>
-                    <td style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 固定內容</td>
-                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 手動選擇</td>
+                    <th style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">🎯 個人化學習路徑</th>
+                    <td data-label="愛米·夢境學堂：" style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ AI智能診斷＋動態調整</td>
+                    <td data-label="C某學院：" style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 基礎分級</td>
+                    <td data-label="傳統學習機品牌：" style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 固定內容</td>
+                    <td data-label="某美語品牌：" style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 手動選擇</td>
                   </tr>
                   <tr>
-                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">📚 108課綱對應</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 完整整合＋即時更新</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 基本對應</td>
-                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 部分支援</td>
-                    <td style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 弱相關</td>
+                    <th style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">📚 108課綱對應</th>
+                    <td data-label="愛米·夢境學堂：" style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 完整整合＋即時更新</td>
+                    <td data-label="C某學院：" style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 基本對應</td>
+                    <td data-label="傳統學習機品牌：" style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 部分支援</td>
+                    <td data-label="某美語品牌：" style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 弱相關</td>
                   </tr>
                   <tr style="background:#f8fafc">
-                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">👨‍👩‍👧‍👦 家長控制權限</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 完整視覺化＋即時監控</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 基本功能</td>
-                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 依設備版本</td>
-                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 有限功能</td>
+                    <th style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">👨‍👩‍👧‍👦 家長控制權限</th>
+                    <td data-label="愛米·夢境學堂：" style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 完整視覺化＋即時監控</td>
+                    <td data-label="C某學院：" style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 基本功能</td>
+                    <td data-label="傳統學習機品牌：" style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 依設備版本</td>
+                    <td data-label="某美語品牌：" style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 有限功能</td>
                   </tr>
                   <tr>
-                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">🎮 遊戲化體驗</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 互動任務＋成就系統</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 動畫課程</td>
-                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 基礎互動</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 多媒體內容</td>
+                    <th style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">🎮 遊戲化體驗</th>
+                    <td data-label="愛米·夢境學堂：" style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 互動任務＋成就系統</td>
+                    <td data-label="C某學院：" style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 動畫課程</td>
+                    <td data-label="傳統學習機品牌：" style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 基礎互動</td>
+                    <td data-label="某美語品牌：" style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 多媒體內容</td>
                   </tr>
                   <tr style="background:#f8fafc">
-                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">📡 直播互動教學</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 即時直播＋隨時回放</td>
-                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 部分課程</td>
-                    <td style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 不支援</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 線上課程</td>
+                    <th style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">📡 直播互動教學</th>
+                    <td data-label="愛米·夢境學堂：" style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ 即時直播＋隨時回放</td>
+                    <td data-label="C某學院：" style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 部分課程</td>
+                    <td data-label="傳統學習機品牌：" style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 不支援</td>
+                    <td data-label="某美語品牌：" style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 線上課程</td>
                   </tr>
                   <tr>
-                    <td style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">🌐 離線學習支援</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ PDF下載＋離線模式</td>
-                    <td style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 有限下載</td>
-                    <td style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 專用設備</td>
-                    <td style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 需網路</td>
+                    <th style="padding:16px;font-weight:600;border-bottom:1px solid #e2e8f0">🌐 離線學習支援</th>
+                    <td data-label="愛米·夢境學堂：" style="padding:16px;text-align:center;background:#d4edda;color:#155724;font-weight:600">✅ PDF下載＋離線模式</td>
+                    <td data-label="C某學院：" style="padding:16px;text-align:center;background:#fef3c7;color:#92400e">⚠️ 有限下載</td>
+                    <td data-label="傳統學習機品牌：" style="padding:16px;text-align:center;background:#d4edda;color:#155724">✅ 專用設備</td>
+                    <td data-label="某美語品牌：" style="padding:16px;text-align:center;background:#fee2e2;color:#991b1b">❌ 需網路</td>
                   </tr>
                 </tbody>
               </table>
@@ -1474,7 +1635,7 @@
           <h2 style="font-size:32px;font-weight:900;margin-bottom:16px;text-shadow:0 2px 8px rgba(0,0,0,0.2)">🎯 我們的獨特價值</h2>
           <p style="font-size:18px;margin-bottom:32px;color:#2d2d2d">不只是學習工具，更是您孩子成長的最佳夥伴</p>
 
-          <div class="value-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:24px">
+          <div class="value-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:16px;margin-top:24px">
             <div class="value-card" style="background:rgba(255,255,255,0.1);padding:24px;border-radius:16px;backdrop-filter:blur(10px)">
               <div style="font-size:48px;margin-bottom:16px">🚀</div>
               <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;color:#1a1a1a">AI智慧學習</h3>
