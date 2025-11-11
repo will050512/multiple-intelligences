@@ -64,6 +64,60 @@
       overflow-wrap:break-word;
     }
 
+    /* Awards Card Styles */
+    .award-image-container{
+      width:100%;
+      height:180px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:16px;
+      background:linear-gradient(135deg,rgba(11,120,198,0.03),rgba(255,123,179,0.03));
+      border-radius:12px;
+      padding:20px;
+      box-sizing:border-box;
+      overflow:hidden;
+    }
+    .award-image-container img{
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      transition:transform 0.3s ease;
+    }
+    .info-card:hover .award-image-container img{
+      transform:scale(1.05);
+    }
+    .info-card{
+      transition:all 0.3s ease;
+    }
+    .info-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 12px 40px rgba(11,120,198,0.15);
+    }
+
+    /* Authority Showcase Responsive */
+    .authority-showcase > div{
+      transition:transform 0.3s ease,box-shadow 0.3s ease;
+    }
+
+    /* Advantages Grid */
+    .advantages-grid{
+      width:100%;
+      max-width:100%;
+    }
+    .advantages-grid .info-card{
+      width:100%;
+      max-width:100%;
+      box-sizing:border-box;
+    }
+
+    /* Desktop only elements */
+    .desktop-only{
+      display:inline;
+    }
+
     /* Typography */
     h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;margin-bottom:var(--spacing-sm)}
     h1{font-size:clamp(2rem, 5vw, 3rem)}
@@ -1005,6 +1059,58 @@
         font-size:13px;
         line-height:1.4;
       }
+      /* 手機版獎項圖片優化 */
+      .award-image-container{
+        height:140px !important;
+        padding:15px !important;
+      }
+
+      /* 手機版權威展示區優化 */
+      .authority-showcase{
+        grid-template-columns:1fr !important;
+        gap:16px !important;
+      }
+      .authority-showcase > div{
+        padding:16px !important;
+      }
+      .authority-showcase img{
+        max-height:160px !important;
+      }
+
+      /* 手機版優勢卡片優化 */
+      .advantages-grid{
+        grid-template-columns:1fr !important;
+        gap:16px !important;
+      }
+      .advantages-grid .info-card{
+        padding:20px !important;
+      }
+      .advantages-grid .info-card h3{
+        font-size:18px !important;
+        margin-bottom:12px !important;
+        padding-right:60px !important;
+      }
+      .advantages-grid .info-card > div:first-child{
+        width:50px !important;
+        height:50px !important;
+        font-size:24px !important;
+        top:12px !important;
+        right:12px !important;
+      }
+      .advantages-grid .info-card p{
+        font-size:13px !important;
+        margin-bottom:12px !important;
+      }
+      .advantages-grid .info-card > div:last-child{
+        padding:12px !important;
+      }
+      .advantages-grid .info-card > div:last-child > div > div{
+        font-size:12px !important;
+        margin-bottom:6px !important;
+      }
+      .desktop-only{
+        display:none;
+      }
 
       footer{
         padding:var(--spacing-xl) 0;
@@ -1116,6 +1222,54 @@
       }
       .awards-grid .info-card p{
         font-size:12px;
+      }
+      /* 超小螢幕獎項圖片優化 */
+      .award-image-container{
+        height:120px !important;
+        padding:10px !important;
+      }
+
+      /* 超小螢幕權威展示區優化 */
+      .authority-showcase > div{
+        padding:12px !important;
+      }
+      .authority-showcase > div > div:first-child{
+        height:140px !important;
+        padding:15px !important;
+      }
+      .authority-showcase h4{
+        font-size:16px !important;
+        margin-bottom:6px !important;
+      }
+      .authority-showcase p{
+        font-size:12px !important;
+      }
+
+      /* 超小螢幕優勢卡片優化 */
+      .advantages-grid .info-card{
+        padding:16px !important;
+      }
+      .advantages-grid .info-card h3{
+        font-size:16px !important;
+        padding-right:55px !important;
+      }
+      .advantages-grid .info-card > div:first-child{
+        width:45px !important;
+        height:45px !important;
+        font-size:22px !important;
+        top:10px !important;
+        right:10px !important;
+      }
+      .advantages-grid .info-card p{
+        font-size:12px !important;
+        line-height:1.6 !important;
+      }
+      .advantages-grid .info-card > div:last-child{
+        padding:10px !important;
+      }
+      .advantages-grid .info-card > div:last-child > div > div{
+        font-size:11px !important;
+        margin-bottom:5px !important;
       }
 
       /* Comparison table extreme mobile optimization */
@@ -1455,39 +1609,80 @@
 
         <div class="awards-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:20px">
           <div class="info-card" style="text-align:center">
-            <div style="font-size:48px;margin-bottom:16px">🎖️</div>
+            <div class="award-image-container">
+              <img src="八大圖檔/發明競賽銀牌獎.png" alt="2020 發明競賽銀牌" loading="lazy">
+            </div>
             <h3 style="color:var(--brand);margin-bottom:12px">2020 發明競賽銀牌</h3>
             <p style="color:var(--muted);font-size:14px">技術創新突破，獲國際發明競賽肯定</p>
           </div>
 
           <div class="info-card" style="text-align:center">
-            <div style="font-size:48px;margin-bottom:16px">📈</div>
+            <div class="award-image-container">
+              <img src="八大圖檔/上櫃市推薦.png" alt="2021 上櫃市推薦" loading="lazy">
+            </div>
             <h3 style="color:var(--brand);margin-bottom:12px">2021 上櫃市推薦</h3>
             <p style="color:var(--muted);font-size:14px">資本市場認可，展現企業成長潛力與穩定發展</p>
           </div>
 
           <div class="info-card" style="text-align:center">
-            <div style="font-size:48px;margin-bottom:16px">💼</div>
+            <div class="award-image-container">
+              <img src="八大圖檔/創櫃版.png" alt="2022 IPO 櫃號取得" loading="lazy">
+            </div>
             <h3 style="color:var(--brand);margin-bottom:12px">2022 IPO 櫃號取得</h3>
             <p style="color:var(--muted);font-size:14px">成功上市，奠定企業長期發展基礎</p>
           </div>
 
           <div class="info-card" style="text-align:center">
-            <div style="font-size:48px;margin-bottom:16px">🥇</div>
+            <div class="award-image-container">
+              <img src="八大圖檔/總統教育獎.jpg" alt="2023 總統教育獎" loading="lazy">
+            </div>
             <h3 style="color:var(--brand);margin-bottom:12px">2023 總統教育獎</h3>
             <p style="color:var(--muted);font-size:14px">國家級教育創新肯定，表彰在兒童教育領域的卓越貢獻</p>
           </div>
 
           <div class="info-card" style="text-align:center">
-            <div style="font-size:48px;margin-bottom:16px">🏆</div>
+            <div class="award-image-container">
+              <img src="八大圖檔/金峰獎.jpg" alt="2024 金峰獎" loading="lazy">
+            </div>
             <h3 style="color:var(--brand);margin-bottom:12px">2024 金峰獎</h3>
             <p style="color:var(--muted);font-size:14px">資訊月百大創新產品，技術領先的市場認證</p>
           </div>
 
           <div class="info-card" style="text-align:center">
-            <div style="font-size:48px;margin-bottom:16px">🏆</div>
+            <div class="award-image-container">
+              <img src="八大圖檔/玉山獎.jpg" alt="2025 國家品牌玉山獎" loading="lazy">
+            </div>
             <h3 style="color:var(--brand);margin-bottom:12px">2025 國家品牌玉山獎</h3>
             <p style="color:var(--muted);font-size:14px">台灣最具代表性品牌獎項，象徵創新與品質的最高榮譽</p>
+          </div>
+        </div>
+
+        <!-- 加強權威性展示區 -->
+        <div style="max-width:1000px;margin:48px auto 0;padding:32px;background:rgba(255,255,255,0.9);border-radius:20px;box-shadow:0 8px 32px rgba(11,120,198,0.12);border:2px solid rgba(11,120,198,0.08)">
+          <h3 style="text-align:center;color:var(--brand);margin-bottom:24px;font-size:24px;font-weight:800">🌟 權威獎項證書展示</h3>
+          <p style="text-align:center;color:var(--muted);margin-bottom:32px;font-size:15px">國家級認證與產業最高榮譽，實力有目共睹</p>
+          
+          <div class="authority-showcase" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:24px">
+            <div style="background:#fff;padding:24px;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,0.08);text-align:center;transition:transform 0.3s ease,box-shadow 0.3s ease" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 12px 32px rgba(11,120,198,0.15)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.08)'">
+              <div style="width:100%;height:220px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,rgba(255,154,60,0.05),rgba(255,123,179,0.05));border-radius:12px;padding:20px;overflow:hidden">
+                <img src="八大圖檔/金鋒獎.png" alt="2024 金峰獎證書" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain;transition:transform 0.3s ease" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              </div>
+              <h4 style="color:var(--accent-2);font-size:18px;font-weight:700;margin-bottom:8px">🏆 2024 金峰獎證書</h4>
+              <p style="color:var(--muted);font-size:13px;line-height:1.6">資訊月百大創新產品<br>技術實力獲產業高度肯定</p>
+            </div>
+
+            <div style="background:#fff;padding:24px;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,0.08);text-align:center;transition:transform 0.3s ease,box-shadow 0.3s ease" onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 12px 32px rgba(11,120,198,0.15)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.08)'">
+              <div style="width:100%;height:220px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,rgba(11,120,198,0.05),rgba(255,123,179,0.05));border-radius:12px;padding:20px;overflow:hidden">
+                <img src="八大圖檔/國家品牌玉山獎.png" alt="2025 國家品牌玉山獎證書" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain;transition:transform 0.3s ease" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              </div>
+              <h4 style="color:var(--brand);font-size:18px;font-weight:700;margin-bottom:8px">🏆 2025 國家品牌玉山獎證書</h4>
+              <p style="color:var(--muted);font-size:13px;line-height:1.6">台灣最高品牌榮譽<br>象徵創新與品質卓越成就</p>
+            </div>
+          </div>
+
+          <div style="margin-top:28px;padding:20px;background:linear-gradient(135deg,rgba(11,120,198,0.08),rgba(255,123,179,0.08));border-radius:12px;text-align:center;border:1px solid rgba(11,120,198,0.15)">
+            <p style="color:var(--brand);font-size:15px;font-weight:700;margin-bottom:8px">✨ 政府與產業雙重認證 ✨</p>
+            <p style="color:var(--muted);font-size:13px;line-height:1.7;margin:0">榮獲總統教育獎、國家品牌玉山獎等多項國家級殊榮，並獲資本市場上櫃推薦，<br class="desktop-only">展現我們在教育科技領域的領先地位與長期發展實力</p>
           </div>
         </div>
       </section>
@@ -1498,51 +1693,67 @@
           <p>全方位學習生態，超越傳統教育框架</p>
         </div>
 
-        <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(2,minmax(350px,1fr));gap:32px">
-          <div class="info-card">
-            <h3 style="color:var(--brand);margin-bottom:20px">📚 課綱完美對應</h3>
-            <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:16px">
+        <div class="advantages-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px">
+          <div class="info-card" style="position:relative;overflow:hidden">
+            <div style="position:absolute;top:16px;right:16px;width:60px;height:60px;background:linear-gradient(135deg,rgba(11,120,198,0.1),rgba(11,120,198,0.05));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px">📚</div>
+            <h3 style="color:var(--brand);margin-bottom:16px;font-size:20px;font-weight:800;padding-right:70px">課綱完美對應</h3>
+            <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px">
               緊密整合108新課綱要求，同步各大出版社教材內容，確保學習內容與學校教學完全接軌，讓孩子在遊戲中掌握課本知識。
             </p>
-            <div style="background:rgba(11,120,198,0.1);padding:12px;border-radius:8px;font-size:13px;color:var(--brand);font-weight:600">
-              ✅ 生字大辭典即時查詢<br>
-              ✅ 學科版本智能切換<br>
-              ✅ 學校進度完美同步
+            <div style="background:rgba(11,120,198,0.08);padding:16px;border-radius:12px;border-left:4px solid var(--brand)">
+              <div style="font-size:13px;color:var(--brand);font-weight:600;line-height:1.8">
+                <div style="margin-bottom:8px">✅ 生字大辭典即時查詢</div>
+                <div style="margin-bottom:8px">✅ 學科版本智能切換</div>
+                <div>✅ 學校進度完美同步</div>
+              </div>
             </div>
           </div>
 
-          <div class="info-card">
-            <h3 style="color:var(--brand);margin-bottom:20px">👨‍👩‍👧‍👦 家長可視化成效</h3>
-            <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:16px">
+          <div class="info-card" style="position:relative;overflow:hidden">
+            <div style="position:absolute;top:16px;right:16px;width:60px;height:60px;background:linear-gradient(135deg,rgba(255,123,179,0.1),rgba(255,123,179,0.05));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px">👨‍👩‍👧‍👦</div>
+            <h3 style="color:var(--brand);margin-bottom:16px;font-size:20px;font-weight:800;padding-right:70px">家長可視化成效</h3>
+            <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px">
               完整的學習追蹤系統，讓家長隨時掌握孩子學習狀況，定期收到個人化進度報表與成長建議。
             </p>
-            <div style="background:rgba(255,123,179,0.1);padding:12px;border-radius:8px;font-size:13px;color:var(--accent);font-weight:600">
-              ✅ 子帳號安全管理<br>
-              ✅ 護眼時間智能控制<br>
+            <div style="background:rgba(255,123,179,0.08);padding:16px;border-radius:12px;border-left:4px solid var(--accent)">
+              <div style="font-size:13px;color:var(--accent);font-weight:600;line-height:1.8">
+                <div style="margin-bottom:8px">✅ 子帳號安全管理</div>
+                <div>✅ 護眼時間智能控制</div>
+              </div>
             </div>
           </div>
 
-          <div class="info-card">
-            <h3 style="color:var(--brand);margin-bottom:20px">🎮 遊戲化＋直播互動</h3>
-            <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:16px">
+          <div class="info-card" style="position:relative;overflow:hidden">
+            <div style="position:absolute;top:16px;right:16px;width:60px;height:60px;background:linear-gradient(135deg,rgba(255,154,60,0.1),rgba(255,154,60,0.05));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px">🎮</div>
+            <h3 style="color:var(--brand);margin-bottom:16px;font-size:20px;font-weight:800;padding-right:70px">遊戲化＋直播互動</h3>
+            <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px">
               將學習轉化為有趣的遊戲體驗，搭配即時直播課程與回放功能，維持孩子持續學習的熱情。
             </p>
-            <div style="background:rgba(255,154,60,0.1);padding:12px;border-radius:8px;font-size:13px;color:var(--accent-2);font-weight:600">
-              ✅ 挑戰性遊戲任務<br>
-              ✅ 直播課程＋隨時回放<br>
-              ✅ AI互動學習體驗
+            <div style="background:rgba(255,154,60,0.08);padding:16px;border-radius:12px;border-left:4px solid var(--accent-2)">
+              <div style="font-size:13px;color:var(--accent-2);font-weight:600;line-height:1.8">
+                <div style="margin-bottom:8px">✅ 挑戰性遊戲任務</div>
+                <div style="margin-bottom:8px">✅ 直播課程＋隨時回放</div>
+                <div>✅ AI互動學習體驗</div>
+              </div>
             </div>
           </div>
 
-          <div class="info-card">
-            <h3 style="color:var(--brand);margin-bottom:20px">🔬 AI個人化學習</h3>
-            <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:16px">
+          <div class="info-card" style="position:relative;overflow:hidden">
+            <div style="position:absolute;top:16px;right:16px;width:60px;height:60px;background:linear-gradient(135deg,rgba(11,120,198,0.1),rgba(255,123,179,0.1));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px">🔬</div>
+            <h3 style="color:var(--brand);margin-bottom:16px;font-size:20px;font-weight:800;padding-right:70px">AI個人化學習</h3>
+            <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px">
               運用先進AI技術分析學習行為，提供個別化學習路徑與即時回饋，最大化學習成效。
             </p>
-            <div style="background:linear-gradient(135deg,rgba(11,120,198,0.1),rgba(255,123,179,0.1));padding:12px;border-radius:8px;font-size:13px;color:var(--brand);font-weight:600">
-              ✅ 智能學習診斷<br>
-              ✅ 個人化推進任務<br>
-              ✅ 語音辨識互動遊戲
+            <div style="background:linear-gradient(135deg,rgba(11,120,198,0.08),rgba(255,123,179,0.08));padding:16px;border-radius:12px;border-left:4px solid var(--brand)">
+              <div style="font-size:13px;color:var(--brand);font-weight:600;line-height:1.8">
+                <div style="margin-bottom:8px">✅ 智能學習診斷</div>
+                <div style="margin-bottom:8px">✅ 個人化推進任務</div>
+                <div>✅ 語音辨識互動遊戲</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
             </div>
           </div>
         </div>
